@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>KCG Invitation | Save the Date</title>
+<meta name="description" content="KCG — A date worth celebrating. Scratch to reveal.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KCG Invitation — Save the Date">
+<meta property="og:description" content="A special date awaits. Scratch to reveal.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KCG Invitation — Save the Date">
+<meta name="twitter:description" content="A special date awaits. Scratch to reveal.">
+<style>
+:root{--gold:#f4cf78;--cream:#fff4d8;--red:#b51f32}
+*{box-sizing:border-box}
+.envelope-screen{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;text-align:center;background:radial-gradient(ellipse at 50% 38%,#351016 0,#18090c 48%,#080808 100%);transition:opacity .8s ease,visibility .8s ease}
+.envelope-screen:before,.envelope-screen:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;filter:blur(70px);background:#9b1d2d;opacity:.2;pointer-events:none}
+.envelope-screen:after{background:#b88a48;right:-100px;bottom:-90px}
+.envelope-screen.opened{opacity:0;visibility:hidden;pointer-events:none}
+.envelope-stars{color:#f4cf78;letter-spacing:.5em;font-size:20px;margin-bottom:20px;text-shadow:0 0 18px #f4cf78}
+.envelope-kcg{font:700 12px Arial,sans-serif;letter-spacing:.42em;color:#f4cf78;margin-bottom:14px}
+.envelope-title{font:500 clamp(32px,8vw,48px)/1.02 Georgia,serif;color:#fff4d8;text-shadow:0 0 25px #b51f3255;margin-bottom:28px}
+.envelope-art{width:min(78vw,330px);height:215px;position:relative;cursor:pointer;perspective:900px;filter:drop-shadow(0 18px 28px #0009)}
+.env-back{position:absolute;inset:20px 0 0;background:#9b1d2d;border-radius:10px}
+.env-letter{position:absolute;z-index:1;left:9%;right:9%;top:15px;height:175px;background:linear-gradient(150deg,#fff0d0,#d7b979);border-radius:5px;color:#351016;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform 1s ease}
+.env-letter span{font:bold 36px Georgia,serif;letter-spacing:.22em}.env-letter small{font:10px Arial,sans-serif;letter-spacing:.25em;margin-top:9px}
+.env-flap{position:absolute;z-index:4;left:0;top:20px;width:100%;height:0;border-left: min(39vw,165px) solid transparent;border-right:min(39vw,165px) solid transparent;border-top:112px solid #f0d18c;transform-origin:top;transition:transform .7s ease;filter:drop-shadow(0 3px 2px #351016)}
+.env-front{position:absolute;z-index:3;left:0;right:0;bottom:0;height:195px;background:linear-gradient(145deg,#b88a48,#e5c47c);clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);border-radius:0 0 10px 10px}
+.envelope-art.opening .env-flap{transform:rotateX(180deg);z-index:0}
+.envelope-art.opening .env-letter{transform:translateY(-85px)}
+.envelope-art.opening{animation:envLift .9s ease forwards}
+@keyframes envLift{to{transform:scale(1.05) translateY(10px);opacity:.15}}
+.env-seal{position:absolute;z-index:5;left:50%;top:112px;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#ffe8a8,#9b1d2d);border:2px solid #f8dfa2;color:#351016;font:bold 22px Georgia,serif;box-shadow:0 3px 10px #0009}
+.open-invite{margin-top:25px;border:1px solid #f4cf78;border-radius:40px;padding:14px 26px;background:linear-gradient(100deg,#8b1424,#b51f32);color:white;font:700 12px Arial,sans-serif;letter-spacing:.18em;box-shadow:0 0 25px #9b1d2d66;cursor:pointer}
+.envelope-caption{font:9px Arial,sans-serif;letter-spacing:.15em;color:#e5d4b2;margin-top:20px}
+.envelope-audio{font:10px Arial,sans-serif;letter-spacing:.2em;color:#f4cf78;margin-top:13px}
+body{margin:0;min-height:100vh;color:#fff;font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at 50% 18%,#260d12 0,#13090b 42%,#080808 100%);display:flex;align-items:center;justify-content:center;padding:22px;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;width:280px;height:280px;border-radius:50%;filter:blur(80px);opacity:.22;pointer-events:none}
+body:before{background:#941b2b;top:-80px;left:-80px}body:after{background:#d39c47;right:-100px;bottom:-100px}
+.wrap{width:min(100%,520px);position:relative;text-align:center;padding:28px 20px 30px;border:1px solid rgba(244,207,120,.35);border-radius:28px;background:linear-gradient(155deg,rgba(29,28,60,.91),rgba(8,12,29,.96));box-shadow:0 25px 80px #0008,inset 0 0 45px #b51f320c}
+.kcg{letter-spacing:.42em;color:var(--gold);font:700 13px Arial,sans-serif;margin:4px 0 14px}
+h1{font-size:clamp(34px,9vw,54px);line-height:.98;margin:0;color:var(--cream);font-weight:500;text-shadow:0 0 24px #e5bd6c55}
+.sub{font:600 11px Arial,sans-serif;letter-spacing:.28em;color:#e7c978;margin:14px 0 22px}
+.orbit{width:100px;height:100px;border:1px solid #f4cf7888;border-radius:50%;margin:0 auto 20px;display:grid;place-items:center;position:relative;box-shadow:0 0 30px #e6b85c22}
+.orbit:before,.orbit:after{content:"";position:absolute;inset:8px;border:1px dashed #b51f3288;border-radius:50%;animation:spin 18s linear infinite}
+.orbit:after{inset:-7px;border-color:#f4cf7855;animation-direction:reverse;animation-duration:26s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.celebration{display:none;margin:20px auto 0;padding:16px 10px 12px;border-top:1px solid #f4cf7855;animation:rise .8s ease both}
+.celebration.show{display:block}
+.burst{font-size:29px;letter-spacing:.45em;color:var(--gold);text-shadow:0 0 20px #f4cf78;animation:glow 1.4s ease-in-out infinite alternate}
+.mark{font:700 15px Arial,sans-serif;letter-spacing:.22em;color:var(--gold);margin-top:8px}
+.coming{font:700 12px Arial,sans-serif;letter-spacing:.14em;color:#fff;margin-top:8px}
+.kcg-reveal{font:10px Arial,sans-serif;letter-spacing:.12em;color:#e8c979;margin-top:12px}
+#fireworks{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--spark,#f4cf78);box-shadow:0 0 12px 3px var(--spark,#f4cf78);animation:burst 1.7s ease-out forwards}
+@keyframes burst{0%{transform:translate(0,0) scale(.2);opacity:1}80%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{from{opacity:.7;transform:scale(.96)}to{opacity:1;transform:scale(1.05)}}
+.orbit span{font:34px Arial;color:var(--gold)}
+.intro{font:14px/1.65 Arial,sans-serif;color:#f0e6d5;max-width:360px;margin:0 auto 22px}
+.scratch-shell{position:relative;width:min(100%,360px);height:164px;margin:0 auto 12px;border-radius:18px;overflow:hidden;border:1px solid #f4cf78aa;background:linear-gradient(135deg,#2a0d12,#1b0b0e);box-shadow:0 12px 35px #0008}
+.reveal{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,#45131b,#17090c 70%);padding:10px}
+.reveal .small{font:10px Arial,sans-serif;letter-spacing:.25em;color:#f0d99e}
+.reveal .date{font:700 clamp(31px,8vw,42px) Arial,sans-serif;letter-spacing:.04em;color:var(--gold);text-shadow:0 0 22px #f4cf7880;margin:8px 0}
+.reveal .year{font:12px Arial,sans-serif;letter-spacing:.35em;color:#fff}
+#scratch{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.hint{font:11px Arial,sans-serif;letter-spacing:.12em;color:#d9c8a0;margin:12px 0 22px}
+#countdownArea{opacity:.35;filter:blur(3px);transition:all .8s ease;pointer-events:none}
+#countdownArea.active{opacity:1;filter:none}
+.count-label{font:10px Arial,sans-serif;letter-spacing:.3em;color:#e8c979;margin-bottom:13px}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.unit{padding:13px 4px 11px;border:1px solid #f4cf7855;border-radius:12px;background:linear-gradient(180deg,#ffffff0c,#ffffff03)}
+.num{display:block;font:700 clamp(24px,6vw,32px) Arial,sans-serif;color:var(--gold);font-variant-numeric:tabular-nums}
+.unit small{font:9px Arial,sans-serif;letter-spacing:.12em;color:#e8d9c0}
+.footer{font:10px Arial,sans-serif;letter-spacing:.2em;color:#c4a978;margin-top:24px}
+.status{font:12px Arial,sans-serif;color:#d9c8a0;margin-top:12px;min-height:18px}
+.music-float{position:fixed;z-index:30;right:14px;top:14px;display:flex;align-items:center;gap:8px;padding:10px 13px;border:1px solid #f4cf78aa;border-radius:30px;background:#1c0a0e;color:#f4cf78;font:700 10px Arial,sans-serif;letter-spacing:.1em;box-shadow:0 5px 22px #0008;cursor:pointer}.music-glyph{font-size:19px;line-height:1}.music-float.playing .music-glyph{animation:musicPulse .65s ease-in-out infinite alternate;text-shadow:0 0 12px #f4cf78}.music-float.playing{border-color:#ffe6a2;box-shadow:0 0 18px #f4cf7855,0 5px 22px #0008}@keyframes musicPulse{to{transform:scale(1.25) rotate(9deg)}}
+.music-row{display:flex;flex-direction:column;align-items:center;gap:7px;margin-top:17px}.music-btn{margin-top:0;border-color:#f4cf7888;color:var(--gold)}.music-note{font:9px Arial,sans-serif;color:#c4a978;letter-spacing:.06em}
+.reset{margin-top:16px;background:transparent;border:1px solid #b51f3277;color:#eadbbd;border-radius:30px;padding:9px 16px;font:11px Arial,sans-serif;letter-spacing:.08em;cursor:pointer}
+@media(max-width:380px){.wrap{padding:24px 14px}.scratch-shell{height:150px}.timer{gap:5px}.unit{padding:11px 2px}}
+</style>
+</head>
+<body>
+<div class="envelope-screen" id="envelopeScreen">
+  <div class="envelope-stars">✦　✧　✦</div>
+  <div class="envelope-kcg">✦ KCG ✦</div>
+  <div class="envelope-title">SAVE<br>THE DATE</div>
+  <div class="envelope-art" id="envelopeArt" role="button" tabindex="0" aria-label="Tap to open KCG invitation">
+    <div class="env-back"></div>
+    <div class="env-letter"><span>KCG</span><small>YOU'RE INVITED</small></div>
+    <div class="env-flap"></div>
+    <div class="env-front"></div>
+    <div class="env-seal">K</div>
+  </div>
+  <button class="open-invite" id="openInvite" type="button">✧ TAP TO OPEN ✧</button>
+  <div class="envelope-caption">KCG • SAVE THE DATE</div>
+  <div class="envelope-audio">♫ ORIGINAL SUSPENSE ROCK MUSIC</div>
+</div>
+<button class="music-float" id="musicFloat" type="button" aria-label="Play or pause music"><span class="music-glyph">♫</span><span id="musicFloatText">MUSIC OFF</span></button>
+<main class="wrap">
+  <div class="kcg">KCG INVITES YOU</div>
+  <h1>SAVE THE<br>DATE</h1>
+  <div class="sub">ONE EVENING. ONE BIG SURPRISE.</div>
+  <div class="orbit"><span>✦</span></div>
+  <p class="intro">Something special is coming.<br>Scratch below to reveal the date.</p>
+
+  <section class="scratch-shell" aria-label="Scratch to reveal the event date">
+    <div class="reveal">
+      <div class="small">YOUR SPECIAL DATE</div>
+      <div class="date">10 JANUARY</div>
+      <div class="year">2027</div>
+    </div>
+    <canvas id="scratch"></canvas>
+  </section>
+  <div class="hint" id="hint">✧ SCRATCH TO REVEAL ✧</div>
+
+  <section id="countdownArea">
+    <div class="count-label">COUNTDOWN TO KCG</div>
+    <div class="timer">
+      <div class="unit"><span class="num" id="days">00</span><small>DAYS</small></div>
+      <div class="unit"><span class="num" id="hours">00</span><small>HOURS</small></div>
+      <div class="unit"><span class="num" id="minutes">00</span><small>MINUTES</small></div>
+      <div class="unit"><span class="num" id="seconds">00</span><small>SECONDS</small></div>
+    </div>
+  </section>
+  <div class="status" id="status">A special day is on its way.</div>
+  <div id="celebration" class="celebration" aria-live="polite">
+    <div class="burst">✦ ✧ ✦</div>
+    <div class="mark">SAVE THE DATE</div>
+    <div class="coming">KCG • THE COUNTDOWN BEGINS</div>
+    <div class="kcg-reveal">5:30 PM</div>
+  </div>
+  <div class="music-row">
+    <button class="reset music-btn" id="musicToggle" type="button">♫ PLAY MUSIC</button>
+    <span class="music-note">Original Indian suspense instrumental • starts on tap</span>
+  </div>
+  <div class="footer">KCG • SAVE THE DATE</div>
+  <div id="fireworks" aria-hidden="true"></div>
+  <button class="reset" id="reset" type="button">RESET SCRATCH CARD</button>
+</main>
+<script>
+const canvas=document.getElementById('scratch'),ctx=canvas.getContext('2d');
+const shell=document.querySelector('.scratch-shell');
+const countdown=document.getElementById('countdownArea');
+const celebration=document.getElementById('celebration');
+const fireworks=document.getElementById('fireworks');
+const hint=document.getElementById('hint');
+const statusText=document.getElementById('status');
+let drawing=false,revealed=false,strokes=0;
+function setupCanvas(){
+  const rect=shell.getBoundingClientRect(),dpr=Math.max(1,window.devicePixelRatio||1);
+  canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  const g=ctx.createLinearGradient(0,0,rect.width,rect.height);
+  g.addColorStop(0,'#e5c47c');g.addColorStop(.45,'#b88a48');g.addColorStop(1,'#f0d99e');
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle=g;ctx.fillRect(0,0,rect.width,rect.height);
+  ctx.fillStyle='rgba(38,28,54,.78)';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('SCRATCH TO REVEAL',rect.width/2,rect.height/2-4);
+  ctx.font='11px Arial';ctx.fillText('A SURPRISE AWAITS',rect.width/2,rect.height/2+19);
+  ctx.strokeStyle='rgba(255,255,255,.32)';ctx.lineWidth=2;
+  for(let x=12;x<rect.width;x+=18){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x-35,rect.height);ctx.stroke();}
+}
+function point(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+function scratch(e){
+  if(!drawing||revealed)return;
+  const p=point(e);ctx.globalCompositeOperation='destination-out';ctx.beginPath();ctx.arc(p.x,p.y,22,0,Math.PI*2);ctx.fill();strokes++;
+  // Keep the scratch interaction light; evaluate the reveal only when the finger lifts.
+}
+function checkReveal(){
+  const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;let clear=0,total=0;
+  for(let i=3;i<data.length;i+=4){total++;if(data[i]<40)clear++;}
+  if(clear/total>.43)reveal();
+}
+function launchFireworks(){
+  fireworks.innerHTML='';
+  const colors=['#f4cf78','#ffffff','#b51f32','#d75a68','#e8c979'];
+  for(let burst=0;burst<5;burst++){
+    const cx=12+Math.random()*76, cy=15+Math.random()*55;
+    for(let i=0;i<22;i++){
+      const spark=document.createElement('i');
+      spark.className='spark';
+      spark.style.left=cx+'%';spark.style.top=cy+'%';
+      spark.style.setProperty('--spark',colors[Math.floor(Math.random()*colors.length)]);
+      const angle=(Math.PI*2*i)/22, distance=45+Math.random()*85;
+      spark.style.setProperty('--dx',Math.cos(angle)*distance+'px');
+      spark.style.setProperty('--dy',Math.sin(angle)*distance+'px');
+      spark.style.animationDelay=(burst*.18)+'s';
+      fireworks.appendChild(spark);
+    }
+  }
+  setTimeout(()=>{fireworks.innerHTML='';},3000);
+}
+function reveal(){
+  if(revealed)return;revealed=true;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  countdown.classList.add('active');hint.textContent='✧ DATE REVEALED ✧';
+  statusText.textContent='10 January 2027 • 5:30 PM';
+  celebration.classList.add('show');
+  launchFireworks();
+  // Short reveal accent layers over the running track; the music loop is never stopped.
+}
+canvas.addEventListener('pointerdown',e=>{drawing=true;canvas.setPointerCapture(e.pointerId);scratch(e)});
+canvas.addEventListener('pointermove',scratch);
+canvas.addEventListener('pointerup',()=>{drawing=false;if(strokes>18)checkReveal();});
+canvas.addEventListener('pointercancel',()=>{drawing=false;if(strokes>18)checkReveal();});
+document.getElementById('reset').addEventListener('click',()=>{
+  revealed=false;strokes=0;countdown.classList.remove('active');celebration.classList.remove('show');fireworks.innerHTML='';
+  hint.textContent='✧ SCRATCH TO REVEAL ✧';
+  statusText.textContent='A special day is on its way.';setupCanvas();
+});
+function updateCountdown(){
+  // Event date set to 5:30 PM IST on 10 January 2027.
+  const target=Date.parse('2027-01-10T17:30:00+05:30');
+  let diff=Math.max(0,target-Date.now());
+  const day=Math.floor(diff/86400000);diff%=86400000;
+  const hour=Math.floor(diff/3600000);diff%=3600000;
+  const minute=Math.floor(diff/60000);diff%=60000;
+  const second=Math.floor(diff/1000);
+  document.getElementById('days').textContent=String(day).padStart(2,'0');
+  document.getElementById('hours').textContent=String(hour).padStart(2,'0');
+  document.getElementById('minutes').textContent=String(minute).padStart(2,'0');
+  document.getElementById('seconds').textContent=String(second).padStart(2,'0');
+  if(target<=Date.now())statusText.textContent='The big day is here! Happy KCG celebration!';
+}
+window.addEventListener('resize',()=>{if(!revealed)setupCanvas()});
+
+// Original cinematic industrial-rock suspense cue (not based on any existing song).
+// Starts on the envelope tap to satisfy mobile browser audio policies.
+let audioCtx=null, musicTimer=null, musicStep=0, musicOn=false;
+let masterGain=null, musicCompressor=null;
+const musicButton=document.getElementById('musicToggle');
+const musicFloat=document.getElementById('musicFloat');
+const musicFloatText=document.getElementById('musicFloatText');
+
+function setupAudio(){
+  if(audioCtx)return;
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  masterGain=audioCtx.createGain();
+  musicCompressor=audioCtx.createDynamicsCompressor();
+  masterGain.gain.value=.82;
+  musicCompressor.threshold.value=-22;
+  musicCompressor.knee.value=18;
+  musicCompressor.ratio.value=8;
+  musicCompressor.attack.value=.003;
+  musicCompressor.release.value=.16;
+  masterGain.connect(musicCompressor);
+  musicCompressor.connect(audioCtx.destination);
+}
+function out(node){node.connect(masterGain);}
+function rockHit(t,kind='kick',level=.5){
+  const len=Math.floor(audioCtx.sampleRate*(kind==='hat'?.075:.22));
+  const b=audioCtx.createBuffer(1,len,audioCtx.sampleRate),d=b.getChannelData(0);
+  for(let i=0;i<len;i++){
+    const env=Math.pow(1-i/len,kind==='snare'?1.4:3.2);
+    d[i]=(Math.random()*2-1)*env;
+  }
+  const src=audioCtx.createBufferSource(),f=audioCtx.createBiquadFilter(),g=audioCtx.createGain();
+  src.buffer=b;
+  f.type='lowpass';
+  f.frequency.value=kind==='kick'?150:kind==='snare'?2300:kind==='hat'?8500:1200;
+  g.gain.value=level;
+  src.connect(f);f.connect(g);out(g);src.start(t);
+  if(kind==='kick'){
+    const o=audioCtx.createOscillator(),og=audioCtx.createGain();
+    o.type='sine';o.frequency.setValueAtTime(115,t);o.frequency.exponentialRampToValueAtTime(43,t+.16);
+    og.gain.setValueAtTime(.0001,t);og.gain.exponentialRampToValueAtTime(.48*level,t+.008);
+    og.gain.exponentialRampToValueAtTime(.0001,t+.19);
+    o.connect(og);out(og);o.start(t);o.stop(t+.2);
+  }
+}
+function guitarPower(t,root,dur=.24,level=.13){
+  [root,root*1.498,root*2].forEach((freq,i)=>{
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter(),sh=audioCtx.createWaveShaper();
+    const curve=new Float32Array(256);
+    for(let n=0;n<256;n++){const x=n*2/255-1;curve[n]=Math.tanh(3.8*x);}
+    sh.curve=curve;sh.oversample='2x';
+    o.type='sawtooth';o.frequency.setValueAtTime(freq,t);
+    f.type='lowpass';f.frequency.value=1250-i*180;f.Q.value=.8;
+    g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(level/(i+1),t+.012);
+    g.gain.setValueAtTime(level*.72/(i+1),t+dur*.55);
+    g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(sh);sh.connect(f);f.connect(g);out(g);o.start(t);o.stop(t+dur+.015);
+  });
+}
+function riffNote(t,freq,dur=.12,level=.07){
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
+  o.type='square';o.frequency.setValueAtTime(freq,t);
+  f.type='lowpass';f.frequency.value=1800;
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(level,t+.006);
+  g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(f);f.connect(g);out(g);o.start(t);o.stop(t+dur+.02);
+}
+function suspenseBass(t,vol=.3){
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
+  o.type='sine';o.frequency.setValueAtTime(78,t);o.frequency.exponentialRampToValueAtTime(38,t+.25);
+  f.type='lowpass';f.frequency.value=130;
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.01);
+  g.gain.exponentialRampToValueAtTime(.0001,t+.3);
+  o.connect(f);f.connect(g);out(g);o.start(t);o.stop(t+.32);
+}
+function suspenseNote(freq,t,dur=.22,vol=.045){
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
+  o.type='triangle';o.frequency.setValueAtTime(freq,t);
+  f.type='lowpass';f.frequency.value=1900;
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol,t+.018);
+  g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(f);f.connect(g);out(g);o.start(t);o.stop(t+dur+.02);
+}
+function indianCelebrationBeatTick(){
+  if(!musicOn||!audioCtx)return;
+  const t=audioCtx.currentTime+.012,step=musicStep%16,bar=Math.floor(musicStep/16);
+  // Original syncopated riff, heavy backbeat and rising cinematic tension.
+  if(step===0||step===8)suspenseBass(t,bar>2?.38:.28);
+  if(step===0||step===4||step===8||step===12)rockHit(t,'kick',.68);
+  if(step===4||step===12)rockHit(t+.012,'snare',.34);
+  if(step%2===0)rockHit(t+.018,'hat',.10);
+  if(step===2||step===6||step===10||step===14)rockHit(t+.02,'hat',.07);
+  const roots=[73.42,73.42,82.41,73.42,65.41,65.41,73.42,82.41];
+  if(step===0||step===3||step===6||step===8||step===11||step===14){
+    const root=roots[(Math.floor(step/2)+bar)%roots.length];
+    guitarPower(t,root,.22,bar>3?.16:.125);
+  }
+  const motif=[0,0,7,0,10,0,7,3,0,0,7,12,10,7,3,0];
+  if(step%2===0){
+    const n=motif[(step+bar*2)%motif.length];
+    if(n)riffNote(t+.01,110*Math.pow(2,n/12),.105,.055);
+  }
+  if(step===15&&bar%2===1){
+    [146.83,174.61,196,220].forEach((f,i)=>suspenseNote(f,t+i*.045,.3,.035));
+  }
+  musicStep++;
+}
+function revealDrop(){
+  if(!musicOn||!audioCtx)return;
+  const t=audioCtx.currentTime+.02;
+  rockHit(t,'kick',.95);rockHit(t+.025,'snare',.48);
+  [73.42,87.31,110].forEach((f,i)=>guitarPower(t+.04+i*.055,f,.58,.2));
+  [0,.08,.16,.24].forEach((d)=>rockHit(t+.08+d,'hat',.18));
+  suspenseNote(587.33,t+.28,.6,.07);
+}
+function setMusicUI(){
+  musicButton.textContent=musicOn?'♫ PAUSE MUSIC':'♫ PLAY MUSIC';
+  musicFloat.classList.toggle('playing',musicOn);
+  musicFloatText.textContent=musicOn?'MUSIC ON':'MUSIC OFF';
+  musicFloat.setAttribute('aria-label',musicOn?'Pause music':'Play music');
+}
+function startMusic(){
+  setupAudio();
+  audioCtx.resume().then(()=>{
+    if(musicOn)return;
+    musicOn=true;musicStep=0;setMusicUI();
+    if(musicTimer)clearInterval(musicTimer);
+    indianCelebrationBeatTick();musicTimer=setInterval(indianCelebrationBeatTick,125);
+  });
+}
+function openEnvelope(){
+  const screen=document.getElementById('envelopeScreen');
+  const art=document.getElementById('envelopeArt');
+  if(screen.classList.contains('opened'))return;
+  // The tap that opens the envelope also unlocks audio playback on mobile browsers.
+  startMusic();
+  art.classList.add('opening');
+  document.getElementById('openInvite').textContent='♫ MUSIC STARTED';
+  setTimeout(()=>screen.classList.add('opened'),850);
+}
+document.getElementById('openInvite').addEventListener('click',openEnvelope);
+document.getElementById('envelopeArt').addEventListener('click',openEnvelope);
+document.getElementById('envelopeArt').addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnvelope();}
+});
+function stopMusic(){
+  musicOn=false;if(musicTimer){clearInterval(musicTimer);musicTimer=null;}
+  if(audioCtx)audioCtx.suspend();
+  setMusicUI();
+}
+musicButton.addEventListener('click',()=>musicOn?stopMusic():startMusic());
+musicFloat.addEventListener('click',()=>musicOn?stopMusic():startMusic());
+// A first scratch is also a user gesture, so start the music if it has not been enabled.
+canvas.addEventListener('pointerdown',()=>{if(!musicOn)startMusic();},{once:true});
+setupCanvas();updateCountdown();setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
