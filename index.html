@@ -128,7 +128,7 @@ h1{font-size:clamp(34px,9vw,54px);line-height:.98;margin:0;color:var(--cream);fo
   <section class="scratch-shell" aria-label="Scratch to reveal the event date">
     <div class="reveal">
       <div class="small">YOUR SPECIAL DATE</div>
-      <div class="date">10 JANUARY</div>
+      <div class="date" style="font-size:clamp(24px,6vw,32px);margin:5px 0">SUNDAY, 10 JANUARY</div>
       <div class="year">2027</div>
     </div>
     <canvas id="scratch"></canvas>
@@ -215,7 +215,7 @@ function reveal(){
   if(revealed)return;revealed=true;
   ctx.clearRect(0,0,canvas.width,canvas.height);
   countdown.classList.add('active');hint.textContent='✧ DATE REVEALED ✧';
-  statusText.textContent='10 January 2027 • 5:30 PM ONWARDS';
+  statusText.textContent='Sunday, 10 January 2027 • 5:30 PM ONWARDS';
   celebration.classList.add('show');
   launchFireworks();
   // Short reveal accent layers over the running track; the music loop is never stopped.
