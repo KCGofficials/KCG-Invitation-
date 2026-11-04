@@ -19,6 +19,7 @@
 .envelope-screen:before,.envelope-screen:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;filter:blur(70px);background:#9b1d2d;opacity:.2;pointer-events:none}
 .envelope-screen:after{background:#b88a48;right:-100px;bottom:-90px}
 .envelope-screen.opened{opacity:0;visibility:hidden;pointer-events:none}
+.wrap.revealed{visibility:visible;opacity:1}
 .envelope-stars{color:#f4cf78;letter-spacing:.5em;font-size:20px;margin-bottom:20px;text-shadow:0 0 18px #f4cf78}
 .envelope-kcg{font:700 12px Arial,sans-serif;letter-spacing:.42em;color:#f4cf78;margin-bottom:14px}
 .envelope-title{font:500 clamp(32px,8vw,48px)/1.02 Georgia,serif;color:#fff4d8;text-shadow:0 0 25px #b51f3255;margin-bottom:28px}
@@ -46,7 +47,7 @@
 body{margin:0;min-height:100vh;color:#fff;font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at 50% 18%,#260d12 0,#13090b 42%,#080808 100%);display:flex;align-items:center;justify-content:center;padding:22px;overflow-x:hidden}
 body:before,body:after{content:"";position:fixed;width:280px;height:280px;border-radius:50%;filter:blur(80px);opacity:.22;pointer-events:none}
 body:before{background:#941b2b;top:-80px;left:-80px}body:after{background:#d39c47;right:-100px;bottom:-100px}
-.wrap{width:min(100%,520px);position:relative;text-align:center;padding:28px 20px 30px;border:1px solid rgba(244,207,120,.35);border-radius:28px;background:linear-gradient(155deg,rgba(29,28,60,.91),rgba(8,12,29,.96));box-shadow:0 25px 80px #0008,inset 0 0 45px #b51f320c}
+.wrap{visibility:hidden;opacity:0;transition:opacity .65s ease,visibility .65s ease;width:min(100%,520px);position:relative;text-align:center;padding:28px 20px 30px;border:1px solid rgba(244,207,120,.35);border-radius:28px;background:linear-gradient(155deg,rgba(29,28,60,.91),rgba(8,12,29,.96));box-shadow:0 25px 80px #0008,inset 0 0 45px #b51f320c}
 .kcg{letter-spacing:.42em;color:var(--gold);font:700 13px Arial,sans-serif;margin:4px 0 14px}
 h1{font-size:clamp(34px,9vw,54px);line-height:.98;margin:0;color:var(--cream);font-weight:500;text-shadow:0 0 24px #e5bd6c55}
 .sub{font:600 11px Arial,sans-serif;letter-spacing:.28em;color:#e7c978;margin:14px 0 22px}
@@ -389,7 +390,7 @@ function openEnvelope(){
   startMusic();
   art.classList.add('opening');
   document.getElementById('openInvite').textContent='♫ MUSIC STARTED';
-  setTimeout(()=>screen.classList.add('opened'),850);
+  setTimeout(()=>{screen.classList.add('opened');document.querySelector('.wrap').classList.add('revealed');},850);
 }
 document.getElementById('openInvite').addEventListener('click',openEnvelope);
 document.getElementById('envelopeArt').addEventListener('click',openEnvelope);
