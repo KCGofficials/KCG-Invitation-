@@ -88,33 +88,49 @@ h1{font-size:clamp(34px,9vw,54px);line-height:.98;margin:0;color:var(--cream);fo
 .reset{margin-top:16px;background:transparent;border:1px solid #b51f3277;color:#eadbbd;border-radius:30px;padding:9px 16px;font:11px Arial,sans-serif;letter-spacing:.08em;cursor:pointer}
 @media(max-width:380px){.wrap{padding:24px 14px}.scratch-shell{height:150px}.timer{gap:5px}.unit{padding:11px 2px}}
 
-.poster-screen{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px 18px;text-align:center;overflow:auto;background:radial-gradient(ellipse at 50% 30%,#40121b 0,#17090d 55%,#050505 100%);color:#fff4d8}
-.poster-frame{width:min(100%,440px);padding:20px 16px 18px;border:1px solid #f4cf78;border-radius:22px;background:linear-gradient(150deg,#1a0b10ee,#090909f5);box-shadow:0 18px 55px #000b,inset 0 0 35px #b51f3222}
-.poster-kcg{font:700 12px Arial,sans-serif;letter-spacing:.5em;color:#f4cf78;margin:3px 0 13px}
-.poster-heading{font:500 clamp(35px,9vw,54px)/.98 Georgia,serif;letter-spacing:.035em;text-shadow:0 0 24px #b51f3277}
-.poster-sub{font:700 10px Arial,sans-serif;letter-spacing:.22em;color:#f4cf78;margin:12px 0 16px}
-.poster-photos{display:grid;grid-template-columns:1.1fr .9fr;gap:8px}
-.poster-photos img{width:100%;height:clamp(145px,34vh,230px);object-fit:cover;border:1px solid #f4cf78;border-radius:12px}
-.poster-photos img+img{height:clamp(125px,29vh,205px);margin-top:18px}
-.poster-tag{font:italic 17px Georgia,serif;color:#fff0d0;margin:15px 0 5px}
-.poster-cta{border:1px solid #f4cf78;border-radius:40px;padding:15px 24px;background:linear-gradient(100deg,#8b1424,#b51f32);color:white;font:700 11px Arial,sans-serif;letter-spacing:.16em;box-shadow:0 0 25px #9b1d2d66;cursor:pointer}
-.poster-foot{font:9px Arial,sans-serif;letter-spacing:.22em;color:#d9c8a0}
-.envelope-screen{opacity:0;visibility:hidden;pointer-events:none}
-.envelope-screen.show{opacity:1;visibility:visible;pointer-events:auto}
+
 .envelope-screen.opened{opacity:0;visibility:hidden;pointer-events:none}
-.music-float{display:none}
+.music-float{display:flex}
 .music-float.visible{display:flex}
 .envelope-audio{display:none}
 
 </style>
 </head>
 <body>
+<div class="envelope-screen" id="envelopeScreen">
+  <div class="envelope-stars">✦　✧　✦</div>
+  <div class="envelope-kcg">✦ KCG ✦</div>
+  <div class="envelope-title">KCG MEGA EVENT<br><span style="font-size:.48em;letter-spacing:.16em;color:#f4cf78">A NIGHT OF GLAMOUR • FUN • GAMES</span></div>
+  <div class="invite-gallery" aria-label="KCG celebration preview">
+    <img src="https://cdn-az.allevents.in/events4/banners/fc94c6b6fb2e00e927fa8c8facb07143b31ec4b3ca1625f811f968ab5c5ee48b-rimg-w1184-h864-dc151414-gmir.jpg?v=1774142342" alt="Friends dressed in elegant black-tie and evening outfits">
+    <img src="https://cdn.tatlerasia.com/asiatatler/i/hk/2019/07/02152235-hkt-0719-cover-story-900x600_cover_1250x833.jpg" alt="Stylish group in formal evening wear">
+  </div>
+  <div class="envelope-caption" style="font-size:11px;color:#f4cf78;letter-spacing:.12em;margin:0 0 14px">SOME NIGHTS ARE MADE TO BE REMEMBERED…</div>
+  <div class="teaser-copy">
+    <div class="teaser-head">🚨 KCG FAMILY, GET READY! ✨</div>
+    इस बार कुछ अलग होगा… कुछ शानदार होगा… और कुछ ऐसा, जिसे आप मिस नहीं करना चाहेंगे!<br>
+    Get ready for an evening filled with <strong>GLAMOUR, FUN, GAMES & UNLIMITED ENTERTAINMENT!</strong>
+    <div class="teaser-question">🤔 WHEN IS THE BIG DAY?</div>
+    आपकी उत्सुकता का इंतज़ार अब खत्म होने वाला है! नीचे क्लिक कीजिए और तारीख का राज़ खोलिए।
+  </div>
+  <div class="envelope-art" id="envelopeArt" role="button" tabindex="0" aria-label="Tap to open KCG invitation">
+    <div class="env-back"></div>
+    <div class="env-letter"><span>KCG</span><small>YOU'RE INVITED</small></div>
+    <div class="env-flap"></div>
+    <div class="env-front"></div>
+    <div class="env-seal">K</div>
+  </div>
+  <button class="open-invite" id="openInvite" type="button">✧ OPEN THE INVITATION & REVEAL ✧</button>
+  <div class="envelope-caption">KCG • SAVE THE DATE</div>
+  <div class="envelope-audio">♫ ORIGINAL SUSPENSE ROCK MUSIC</div>
+</div>
+<button class="music-float" id="musicFloat" type="button" aria-label="Play or pause music"><span class="music-glyph">♫</span><span id="musicFloatText">MUSIC OFF</span></button>
 <main class="wrap">
-  <div class="kcg">✦ KCG MEGA EVENT ✦</div>
+  <div class="kcg">KCG INVITES YOU</div>
   <h1>SAVE THE<br>DATE</h1>
-  <div class="sub">GLAMOUR • FUN • GAMES • SURPRISES</div>
+  <div class="sub">ONE EVENING. ONE BIG SURPRISE.</div>
   <div class="orbit"><span>✦</span></div>
-  <p class="intro">An evening unlike anything before. A night of glamour, fun, games & surprises.<br>Scratch below to reveal the date and time.</p>
+  <p class="intro">Something special is coming.<br>Scratch below to reveal the date.</p>
 
   <section class="scratch-shell" aria-label="Scratch to reveal the event date">
     <div class="reveal">
@@ -146,7 +162,7 @@ h1{font-size:clamp(34px,9vw,54px);line-height:.98;margin:0;color:var(--cream);fo
     <button class="reset music-btn" id="musicToggle" type="button">♫ PLAY MUSIC</button>
     <span class="music-note">Original Indian suspense instrumental • starts on tap</span>
   </div>
-  <div class="footer">KCG • ONE EVENING • ENDLESS SURPRISES</div>
+  <div class="footer">KCG • SAVE THE DATE</div>
   <div id="fireworks" aria-hidden="true"></div>
   <button class="reset" id="reset" type="button">RESET SCRATCH CARD</button>
 </main>
@@ -375,6 +391,11 @@ function openEnvelope(){
   document.getElementById('openInvite').textContent='♫ MUSIC STARTED';
   setTimeout(()=>screen.classList.add('opened'),850);
 }
+document.getElementById('openInvite').addEventListener('click',openEnvelope);
+document.getElementById('envelopeArt').addEventListener('click',openEnvelope);
+document.getElementById('envelopeArt').addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnvelope();}
+});
 function stopMusic(){
   musicOn=false;if(musicTimer){clearInterval(musicTimer);musicTimer=null;}
   if(audioCtx)audioCtx.suspend();
