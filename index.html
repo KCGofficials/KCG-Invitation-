@@ -87,9 +87,43 @@ h1{font-size:clamp(34px,9vw,54px);line-height:.98;margin:0;color:var(--cream);fo
 .music-row{display:flex;flex-direction:column;align-items:center;gap:7px;margin-top:17px}.music-btn{margin-top:0;border-color:#f4cf7888;color:var(--gold)}.music-note{display:none;font:9px Arial,sans-serif;color:#c4a978;letter-spacing:.06em}
 .reset{margin-top:16px;background:transparent;border:1px solid #b51f3277;color:#eadbbd;border-radius:30px;padding:9px 16px;font:11px Arial,sans-serif;letter-spacing:.08em;cursor:pointer}
 @media(max-width:380px){.wrap{padding:24px 14px}.scratch-shell{height:150px}.timer{gap:5px}.unit{padding:11px 2px}}
+
+.poster-screen{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px 18px;text-align:center;overflow:auto;background:radial-gradient(ellipse at 50% 30%,#40121b 0,#17090d 55%,#050505 100%);color:#fff4d8}
+.poster-frame{width:min(100%,440px);padding:20px 16px 18px;border:1px solid #f4cf78;border-radius:22px;background:linear-gradient(150deg,#1a0b10ee,#090909f5);box-shadow:0 18px 55px #000b,inset 0 0 35px #b51f3222}
+.poster-kcg{font:700 12px Arial,sans-serif;letter-spacing:.5em;color:#f4cf78;margin:3px 0 13px}
+.poster-heading{font:500 clamp(35px,9vw,54px)/.98 Georgia,serif;letter-spacing:.035em;text-shadow:0 0 24px #b51f3277}
+.poster-sub{font:700 10px Arial,sans-serif;letter-spacing:.22em;color:#f4cf78;margin:12px 0 16px}
+.poster-photos{display:grid;grid-template-columns:1.1fr .9fr;gap:8px}
+.poster-photos img{width:100%;height:clamp(145px,34vh,230px);object-fit:cover;border:1px solid #f4cf78;border-radius:12px}
+.poster-photos img+img{height:clamp(125px,29vh,205px);margin-top:18px}
+.poster-tag{font:italic 17px Georgia,serif;color:#fff0d0;margin:15px 0 5px}
+.poster-cta{border:1px solid #f4cf78;border-radius:40px;padding:15px 24px;background:linear-gradient(100deg,#8b1424,#b51f32);color:white;font:700 11px Arial,sans-serif;letter-spacing:.16em;box-shadow:0 0 25px #9b1d2d66;cursor:pointer}
+.poster-foot{font:9px Arial,sans-serif;letter-spacing:.22em;color:#d9c8a0}
+.envelope-screen{opacity:0;visibility:hidden;pointer-events:none}
+.envelope-screen.show{opacity:1;visibility:visible;pointer-events:auto}
+.envelope-screen.opened{opacity:0;visibility:hidden;pointer-events:none}
+.music-float{display:none}
+.music-float.visible{display:flex}
+.envelope-audio{display:none}
+
 </style>
 </head>
 <body>
+<section class="poster-screen" id="posterScreen" aria-label="KCG Mega Event poster">
+  <div class="poster-frame">
+    <div class="poster-kcg">✦ KCG PRESENTS ✦</div>
+    <div class="poster-heading">MEGA<br>EVENT</div>
+    <div class="poster-sub">A NIGHT OF GLAMOUR • FUN • GAMES</div>
+    <div class="poster-photos">
+      <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=900&q=85" alt="Elegant celebration gathering">
+      <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=700&q=85" alt="Friends celebrating together">
+    </div>
+    <div class="poster-tag">One Evening. Endless Memories.</div>
+    <div class="poster-foot">THE COUNTDOWN TO SOMETHING SPECIAL BEGINS…</div>
+  </div>
+  <button class="poster-cta" id="posterContinue" type="button">✧ TAP TO ENTER THE KCG EXPERIENCE ✧</button>
+  <div class="poster-foot">KCG • SAVE THE DATE</div>
+</section>
 <div class="envelope-screen" id="envelopeScreen">
   <div class="envelope-stars">✦　✧　✦</div>
   <div class="envelope-kcg">✦ KCG ✦</div>
@@ -384,6 +418,11 @@ function openEnvelope(){
   document.getElementById('openInvite').textContent='♫ MUSIC STARTED';
   setTimeout(()=>screen.classList.add('opened'),850);
 }
+document.getElementById('posterContinue').addEventListener('click',()=>{
+  document.getElementById('posterScreen').style.display='none';
+  document.getElementById('envelopeScreen').classList.add('show');
+  document.getElementById('musicFloat').classList.add('visible');
+});
 document.getElementById('openInvite').addEventListener('click',openEnvelope);
 document.getElementById('envelopeArt').addEventListener('click',openEnvelope);
 document.getElementById('envelopeArt').addEventListener('keydown',e=>{
