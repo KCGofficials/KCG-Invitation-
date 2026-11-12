@@ -128,7 +128,7 @@ function startMusic(){
  audioSetup();audio.resume().then(()=>{
   if(musicOn)return;
   musicOn=true;$('music').textContent='♫ MUSIC ON';$('music').classList.add('on');
-  musicTick();beatTimer=setInterval(casinoMusicTick,190);
+  musicTick();beatTimer=setInterval(musicTick,190);
  });
 }
 function stopMusic(){
@@ -137,10 +137,23 @@ function stopMusic(){
 }
 $('music').addEventListener('click',()=>musicOn?stopMusic():startMusic());
 const symbols=['✦','G','S','★','K','C','◆','✧'];
-function spinReel(id,final,delay){
- const el=$(id),span=el.querySelector('span');el.classList.add('spinning');
- let n=0;const timer=setInterval(()=>{span.textContent=symbols[Math.floor(Math.random()*symbols.length)];n++;},75);
- setTimeout(()=>{clearInterval(timer);span.textContent=final;el.classList.remove('spinning');},delay);
+function spinReel(id,final,duration){
+ const el=$(id),span=el.querySelector('span');
+ const started=performance.now();
+ el.classList.add('spinning');
+ function tick(){
+  const elapsed=performance.now()-started;
+  if(elapsed>=duration){
+   span.textContent=final;el.classList.remove('spinning');
+   tone(740,.16,'triangle',.10);tone(370,.12,'sine',.06,.04);
+   return;
+  }
+  span.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  const progress=elapsed/duration;
+  const nextDelay=55+Math.pow(progress,3)*210;
+  setTimeout(tick,nextDelay);
+ }
+ tick();
 }
 function revealSound(){
  [523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>tone(f,.7,'triangle',.15,i*.12));
@@ -164,10 +177,10 @@ function pullLever(){
  played=true;startMusic();$('play').disabled=true;$('lever').disabled=true;
  $('play').textContent='★ GET READY… ★';
  tone(180,.7,'sawtooth',.12);noise(.45,.16,2400);
- spinReel('r1','10',1450);spinReel('r2','JAN',2250);spinReel('r3','2027',3050);
+ spinReel('r1','10',4600);spinReel('r2','JAN',5600);spinReel('r3','2027',6600);
  setTimeout(()=>{
   $('result').classList.add('show');$('countArea').classList.add('show');$('play').textContent='✦ REVEAL COMPLETE ✦';revealSound();fireworks();
- },3150);
+ },7550);
 }
 $('play').addEventListener('click',pullLever);
 $('lever').addEventListener('click',pullLever);
