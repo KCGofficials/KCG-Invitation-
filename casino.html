@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#100609">
-<title>KCG Royal Casino | The Big Reveal</title>
-<meta name="description" content="KCG Royal Casino — play to reveal the big day.">
+<title>KCG | The Grand Spectacle</title>
+<meta name="description" content="KCG presents The Grand Spectacle. Discover the date.">
 <style>
 :root{--gold:#f4cf78;--gold2:#ffe9aa;--red:#a8172c;--ink:#100609}
 *{box-sizing:border-box}
@@ -59,29 +59,29 @@ h1{font-size:clamp(34px,9vw,49px);line-height:1;margin:0;color:var(--gold2);text
 <div id="fx"></div>
 <main class="page">
   <div class="brand">KCG PRESENTS</div>
-  <h1>ROYAL CASINO</h1>
-  <div class="tag">THE BIG DATE REVEAL</div>
-  <div class="casino-sign">✦ TRY YOUR LUCK ✦</div>
-  <section class="machine" aria-label="Casino slot machine">
-    <div class="marquee">★ JACKPOT ★ JACKPOT ★</div>
+  <h1>THE GRAND SPECTACLE</h1>
+  <div class="tag">A DATE TO REMEMBER</div>
+  <div class="casino-sign">✦ THE BIG REVEAL ✦</div>
+  <section class="machine" aria-label="Interactive date reveal console">
+    <div class="marquee">★ THE GRAND REVEAL ★</div>
     <div class="reels">
       <div class="reel" id="r1"><span>♠</span></div>
       <div class="reel" id="r2"><span>7</span></div>
       <div class="reel" id="r3"><span>♦</span></div>
     </div>
-    <button class="lever" id="lever" type="button" aria-label="Pull the casino lever" title="PULL THE LEVER"></button>
-    <div class="machine-foot">ROYAL KCG • LUCK IS IN YOUR HANDS</div>
+    <button class="lever" id="lever" type="button" aria-label="Pull the reveal lever" title="PULL TO REVEAL"></button>
+    <div class="machine-foot">KCG • THE MOMENT IS YOURS</div>
   </section>
-  <button class="play" id="play">▶ PLAY & REVEAL THE DATE</button>
-  <p class="instruction">Pull the lever… let the reels spin… and discover when the KCG Mega Event awaits you!</p>
+  <button class="play" id="play">▶ REVEAL THE DATE</button>
+  <p class="instruction">Pull the lever and discover the date of the KCG Grand Spectacle!</p>
   <section class="result" id="result" aria-live="polite">
-    <div class="jackpot">✦ JACKPOT! ✦</div>
+    <div class="jackpot">✦ THE DATE IS REVEALED ✦</div>
     <div class="date">10 JANUARY<br>2027</div>
     <div class="time">SUNDAY • 5:30 PM ONWARDS</div>
-    <div class="slogan">The Royal Night Awaits You!</div>
+    <div class="slogan">An extraordinary experience awaits!</div>
   </section>
   <section class="count-area" id="countArea">
-    <div class="count-title">COUNTDOWN TO THE ROYAL NIGHT</div>
+    <div class="count-title">COUNTDOWN TO THE GRAND SPECTACLE</div>
     <div class="timer">
       <div class="unit"><span class="num" id="days">00</span><small>DAYS</small></div>
       <div class="unit"><span class="num" id="hours">00</span><small>HOURS</small></div>
@@ -89,7 +89,7 @@ h1{font-size:clamp(34px,9vw,49px);line-height:1;margin:0;color:var(--gold2);text
       <div class="unit"><span class="num" id="seconds">00</span><small>SECONDS</small></div>
     </div>
   </section>
-  <div class="footer">KCG • A NIGHT TO REMEMBER</div>
+  <div class="footer">KCG • A CELEBRATION BEYOND ORDINARY</div>
 </main>
 <script>
 const $=id=>document.getElementById(id);
@@ -136,13 +136,13 @@ function stopMusic(){
  if(audio)audio.suspend();$('music').textContent='♫ MUSIC OFF · TAP TO ON';$('music').classList.remove('on');
 }
 $('music').addEventListener('click',()=>musicOn?stopMusic():startMusic());
-const symbols=['7','♠','♦','♣','★','K','♛','♥'];
+const symbols=['✦','G','S','★','K','C','◆','✧'];
 function spinReel(id,final,delay){
  const el=$(id),span=el.querySelector('span');el.classList.add('spinning');
  let n=0;const timer=setInterval(()=>{span.textContent=symbols[Math.floor(Math.random()*symbols.length)];n++;},75);
  setTimeout(()=>{clearInterval(timer);span.textContent=final;el.classList.remove('spinning');},delay);
 }
-function jackpotSound(){
+function revealSound(){
  [523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>tone(f,.7,'triangle',.15,i*.12));
  noise(.5,.12,5000);
 }
@@ -162,11 +162,11 @@ function pullLever(){
  $('lever').classList.add('pulled');
  setTimeout(()=>$('lever').classList.remove('pulled'),450);
  played=true;startMusic();$('play').disabled=true;$('lever').disabled=true;
- $('play').textContent='★ GOOD LUCK… ★';
+ $('play').textContent='★ GET READY… ★';
  tone(180,.7,'sawtooth',.12);noise(.45,.16,2400);
  spinReel('r1','10',1450);spinReel('r2','JAN',2250);spinReel('r3','2027',3050);
  setTimeout(()=>{
-  $('result').classList.add('show');$('countArea').classList.add('show');$('play').textContent='✦ JACKPOT UNLOCKED ✦';jackpotSound();fireworks();
+  $('result').classList.add('show');$('countArea').classList.add('show');$('play').textContent='✦ REVEAL COMPLETE ✦';revealSound();fireworks();
  },3150);
 }
 $('play').addEventListener('click',pullLever);
