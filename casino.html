@@ -52,6 +52,56 @@ h1{font-size:clamp(34px,9vw,49px);line-height:1;margin:0;color:var(--gold2);text
 @keyframes pop{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:380px){body{padding:12px}.page{padding:22px 14px}.reel{height:80px}}
+
+/* GRAND SPECTACLE: richer animated stage treatment */
+body{
+ background:
+  radial-gradient(ellipse at 12% 18%,#7d1742 0,transparent 34%),
+  radial-gradient(ellipse at 88% 22%,#123f72 0,transparent 32%),
+  radial-gradient(ellipse at 50% 95%,#6d310c 0,transparent 38%),
+  linear-gradient(145deg,#090611 0%,#240b26 35%,#071526 68%,#100609 100%);
+ background-size:180% 180%;
+ animation:stageHue 14s ease-in-out infinite alternate;
+}
+@keyframes stageHue{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+body:before,body:after{width:360px;height:360px;filter:blur(105px);opacity:.34;animation:orbFloat 8s ease-in-out infinite alternate}
+body:after{animation-delay:-4s}
+@keyframes orbFloat{from{transform:translate3d(-20px,-10px,0) scale(.88)}to{transform:translate3d(55px,45px,0) scale(1.18)}}
+.page{
+ border:1px solid #f8d77eaa;
+ background:linear-gradient(145deg,#28102df2,#0b1020f5 58%,#260d17f2);
+ box-shadow:0 25px 90px #000d,0 0 32px #e9b84b22,inset 0 0 60px #d8a64a19;
+ animation:pageGlow 4s ease-in-out infinite alternate;
+}
+@keyframes pageGlow{from{box-shadow:0 25px 90px #000d,0 0 22px #e9b84b22,inset 0 0 45px #d8a64a12}to{box-shadow:0 25px 90px #000d,0 0 48px #e9b84b55,inset 0 0 70px #d8a64a25}}
+h1{background:linear-gradient(90deg,#fff2b8,#f7bb53,#fff9d8,#e9a9ff,#ffe5a0);background-size:250% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:goldFlow 5s linear infinite}
+@keyframes goldFlow{to{background-position:250% center}}
+.reveal-sign{background:linear-gradient(90deg,#5e1738,#9b5b13,#5e1738);background-size:200% 100%;animation:signFlow 4s linear infinite;box-shadow:0 0 22px #f6ca6488, inset 0 0 12px #fff3}
+@keyframes signFlow{to{background-position:200% 0}}
+.machine{
+ background:linear-gradient(135deg,#a51d42 0%,#5a164e 28%,#25134b 58%,#7a3510 100%);
+ background-size:250% 250%;animation:machineShine 7s ease infinite;
+ box-shadow:inset 0 0 0 3px #f2c86d,inset 0 0 35px #000c,0 0 22px #f5c65b77,0 15px 42px #000b;
+}
+@keyframes machineShine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.machine:after{content:"";position:absolute;inset:-7px;border-radius:29px;border:1px solid #ffe6a0;opacity:.5;pointer-events:none;animation:ringPulse 2.4s ease-in-out infinite}
+@keyframes ringPulse{50%{opacity:1;box-shadow:0 0 20px #f8d47c88}}
+.marquee{animation:marqueePulse 1.8s ease-in-out infinite alternate}
+@keyframes marqueePulse{to{text-shadow:0 0 8px #fff,0 0 22px #ffcf5c,0 0 38px #ff8c35;color:#fff5c8}}
+.reels{box-shadow:inset 0 0 16px #6d3b0b,0 0 20px #ffe29b66}
+.reel{box-shadow:inset 0 0 12px #8a5b1c55,0 0 12px #fff3}
+.lever:before{box-shadow:0 0 12px #ffe6a0,0 0 25px #ffbd49;animation:leverLamp 1.4s ease-in-out infinite alternate}
+@keyframes leverLamp{to{box-shadow:0 0 22px #fff0b4,0 0 38px #ff9e34}}
+.play{background:linear-gradient(100deg,#fff0a9,#e4a53a 25%,#ffe6a0 50%,#c27a22 75%,#fff0a9);background-size:220% 100%;animation:buttonShine 3s linear infinite,buttonPulse 2s ease-in-out infinite alternate;box-shadow:0 0 22px #e7b95199,0 0 45px #c84b5b44}
+@keyframes buttonShine{to{background-position:220% 0}}
+@keyframes buttonPulse{to{transform:translateY(-2px);box-shadow:0 0 32px #ffe08aaa,0 0 55px #d94e7744}}
+.result.show{box-shadow:0 0 28px #f4cf7866,0 0 55px #e14a7b33,inset 0 0 35px #ffd97816}
+.music{background:linear-gradient(120deg,#27102c,#111a32);box-shadow:0 0 18px #f4cf7844}
+.footer{color:#f0cf85;text-shadow:0 0 12px #d88d48}
+#fx{z-index:6}
+.spark{width:7px;height:7px;box-shadow:0 0 12px 4px var(--c),0 0 26px 8px #ffffff33}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
 </style>
 </head>
 <body>
