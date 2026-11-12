@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100609">
+<title>KCG Royal Casino | The Big Reveal</title>
+<meta name="description" content="KCG Royal Casino — play to reveal the big day.">
+<style>
+:root{--gold:#f4cf78;--gold2:#ffe9aa;--red:#a8172c;--ink:#100609}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 15%,#4b101b 0,#1a080d 48%,#080608 100%);color:#fff4dc;font-family:Georgia,serif;display:flex;align-items:center;justify-content:center;padding:22px;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;width:260px;height:260px;border-radius:50%;filter:blur(90px);opacity:.23;pointer-events:none;background:#e2a83d;top:-100px;left:-90px}
+body:after{background:#b51f32;top:auto;left:auto;right:-100px;bottom:-110px}
+.page{position:relative;z-index:1;width:min(100%,500px);padding:26px 20px 28px;text-align:center;border:1px solid #f4cf7866;border-radius:28px;background:linear-gradient(155deg,#241018f2,#0c090df5);box-shadow:0 24px 80px #000b,inset 0 0 45px #d8a64a12}
+.brand{font:700 11px Arial,sans-serif;letter-spacing:.48em;color:var(--gold);margin-bottom:12px}
+h1{font-size:clamp(34px,9vw,49px);line-height:1;margin:0;color:var(--gold2);text-shadow:0 0 22px #f4cf7855}
+.tag{font:700 10px Arial,sans-serif;letter-spacing:.25em;color:#f2d99e;margin:12px 0 22px}
+.casino-sign{display:inline-block;padding:8px 18px;border:1px solid var(--gold);border-radius:5px;color:var(--gold2);font:bold 12px Arial,sans-serif;letter-spacing:.25em;box-shadow:0 0 18px #e2b95a55;text-shadow:0 0 10px #f4cf78;margin-bottom:18px}
+.machine{position:relative;margin:0 auto;width:min(100%,365px);padding:19px 16px 20px;border:3px solid #e8bd62;border-radius:24px;background:linear-gradient(145deg,#8e1426,#400b17 45%,#17080d);box-shadow:inset 0 0 0 3px #5e1020,inset 0 0 25px #000b,0 12px 35px #0009}
+.machine:before{content:"";position:absolute;inset:7px;border:1px solid #f4cf7888;border-radius:17px;pointer-events:none}
+.marquee{font:bold 13px Arial,sans-serif;letter-spacing:.25em;color:#ffe9aa;text-shadow:0 0 12px #ffcf5c;margin:0 0 14px}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px;border:2px solid #f5d98e;border-radius:12px;background:linear-gradient(#fff5d8,#c99a45 18%,#fff1c6 50%,#b98634);box-shadow:inset 0 0 12px #6d3b0b}
+.reel{height:92px;display:grid;place-items:center;border-radius:7px;background:linear-gradient(180deg,#fffdf0,#f4e5bd 50%,#fffdf2);color:#8d1023;font:bold clamp(25px,7vw,36px) Arial,sans-serif;text-shadow:0 1px #fff;box-shadow:inset 0 0 12px #8a5b1c55;overflow:hidden}
+.reel span{display:block}
+.reel.spinning span{animation:reelBlur .11s linear infinite}
+@keyframes reelBlur{0%{transform:translateY(-12px);filter:blur(2px)}50%{transform:translateY(10px);filter:blur(1px)}100%{transform:translateY(-12px);filter:blur(2px)}}
+.lever{position:absolute;right:-16px;top:45px;width:13px;height:95px;border-radius:9px;background:linear-gradient(90deg,#8d6a37,#ffe6a0,#9d7137);box-shadow:2px 4px 7px #0009}
+.lever:before{content:"";position:absolute;top:-10px;left:-8px;width:29px;height:29px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff1b9,#d5a344 55%,#7d1424 80%);border:2px solid #f8dda0}
+.machine-foot{font:9px Arial,sans-serif;letter-spacing:.2em;color:#f7d995;margin-top:13px}
+.play{margin-top:22px;padding:15px 34px;border:1px solid #fff0b4;border-radius:40px;background:linear-gradient(100deg,#f8d77e,#b98532 55%,#f8d77e);color:#3a1010;font:bold 13px Arial,sans-serif;letter-spacing:.2em;box-shadow:0 0 25px #e7b95177;cursor:pointer}
+.play:disabled{opacity:.65;cursor:default}
+.instruction{font:11px/1.6 Arial,sans-serif;color:#e8d8bd;margin:16px auto 0;max-width:330px}
+.result{display:none;margin:22px auto 0;padding:19px 12px 16px;border:1px solid #f4cf78;border-radius:18px;background:radial-gradient(ellipse at 50% 0,#571421,#19090e 72%);box-shadow:0 0 30px #f4cf7833;animation:rise .8s ease both}
+.result.show{display:block}
+.jackpot{font:bold 15px Arial,sans-serif;letter-spacing:.3em;color:#ffe18a;text-shadow:0 0 15px #f4cf78}
+.date{font:bold clamp(28px,8vw,40px) Arial,sans-serif;color:#fff0bb;line-height:1.12;margin:12px 0 7px;text-shadow:0 0 20px #e6b84c88}
+.time{font:bold 12px Arial,sans-serif;letter-spacing:.16em;color:#f4cf78}
+.slogan{font:italic 13px Georgia,serif;color:#f7e8c6;margin-top:12px}
+.count-area{display:none;margin-top:20px}
+.count-area.show{display:block;animation:rise .8s ease both}
+.count-title{font:bold 10px Arial,sans-serif;letter-spacing:.3em;color:#eacb7b;margin-bottom:12px}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.unit{padding:11px 2px;border:1px solid #f4cf7855;border-radius:11px;background:#ffffff08}
+.num{display:block;font:bold clamp(21px,5.5vw,29px) Arial,sans-serif;color:var(--gold);font-variant-numeric:tabular-nums}
+.unit small{font:9px Arial,sans-serif;letter-spacing:.1em;color:#e8d9c0}
+.music{position:fixed;z-index:5;right:13px;top:13px;border:1px solid #f4cf78aa;border-radius:30px;padding:10px 13px;background:#1b080e;color:#f4cf78;font:bold 10px Arial,sans-serif;letter-spacing:.1em;cursor:pointer}
+.music.on{box-shadow:0 0 18px #f4cf7866}
+.footer{font:9px Arial,sans-serif;letter-spacing:.22em;color:#c9a968;margin-top:23px}
+#fx{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 12px 3px var(--c);animation:pop 1.8s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:380px){body{padding:12px}.page{padding:22px 14px}.reel{height:80px}}
+</style>
+</head>
+<body>
+<button class="music" id="music" type="button">♫ SOUND ON</button>
+<div id="fx"></div>
+<main class="page">
+  <div class="brand">KCG PRESENTS</div>
+  <h1>ROYAL CASINO</h1>
+  <div class="tag">THE BIG DATE REVEAL</div>
+  <div class="casino-sign">✦ TRY YOUR LUCK ✦</div>
+  <section class="machine" aria-label="Casino slot machine">
+    <div class="marquee">★ JACKPOT ★ JACKPOT ★</div>
+    <div class="reels">
+      <div class="reel" id="r1"><span>♠</span></div>
+      <div class="reel" id="r2"><span>7</span></div>
+      <div class="reel" id="r3"><span>♦</span></div>
+    </div>
+    <div class="lever"></div>
+    <div class="machine-foot">ROYAL KCG • LUCK IS IN YOUR HANDS</div>
+  </section>
+  <button class="play" id="play">▶ PLAY & REVEAL THE DATE</button>
+  <p class="instruction">Pull the lever… let the reels spin… and discover when the KCG Mega Event awaits you!</p>
+  <section class="result" id="result" aria-live="polite">
+    <div class="jackpot">✦ JACKPOT! ✦</div>
+    <div class="date">10 JANUARY<br>2027</div>
+    <div class="time">SUNDAY • 5:30 PM ONWARDS</div>
+    <div class="slogan">The Royal Night Awaits You!</div>
+  </section>
+  <section class="count-area" id="countArea">
+    <div class="count-title">COUNTDOWN TO THE ROYAL NIGHT</div>
+    <div class="timer">
+      <div class="unit"><span class="num" id="days">00</span><small>DAYS</small></div>
+      <div class="unit"><span class="num" id="hours">00</span><small>HOURS</small></div>
+      <div class="unit"><span class="num" id="minutes">00</span><small>MINUTES</small></div>
+      <div class="unit"><span class="num" id="seconds">00</span><small>SECONDS</small></div>
+    </div>
+  </section>
+  <div class="footer">KCG • A NIGHT TO REMEMBER</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let audio=null,master=null,musicOn=false,beatTimer=null,beat=0,spinTimer=null,played=false;
+function audioSetup(){
+ if(audio)return;
+ audio=new (window.AudioContext||window.webkitAudioContext)();
+ master=audio.createGain();master.gain.value=.72;
+ const comp=audio.createDynamicsCompressor();comp.threshold.value=-20;comp.knee.value=16;comp.ratio.value=7;comp.attack.value=.004;comp.release.value=.18;
+ master.connect(comp);comp.connect(audio.destination);
+}
+function tone(freq,dur=.16,wave='sine',vol=.12,delay=0){
+ if(!audio)return;
+ const t=audio.currentTime+delay,o=audio.createOscillator(),g=audio.createGain();
+ o.type=wave;o.frequency.setValueAtTime(freq,t);
+ g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+ o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.03);
+}
+function noise(dur=.12,vol=.12,filter=1800){
+ const len=Math.floor(audio.sampleRate*dur),buf=audio.createBuffer(1,len,audio.sampleRate),d=buf.getChannelData(0);
+ for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+ const src=audio.createBufferSource(),f=audio.createBiquadFilter(),g=audio.createGain();
+ src.buffer=buf;f.type='lowpass';f.frequency.value=filter;g.gain.value=vol;src.connect(f);f.connect(g);g.connect(master);src.start();
+}
+function casinoMusicTick(){
+ if(!musicOn)return;
+ const seq=[523.25,659.25,783.99,1046.5,783.99,659.25,587.33,698.46];
+ const i=beat%8;
+ if(i===0||i===4){tone(65,.24,'sine',.28);tone(130,.12,'triangle',.1,.01)}
+ tone(seq[i],.18,'triangle',.055);
+ if(i%2===0)noise(.055,.035,7500);
+ if(i===2||i===6)tone(seq[i]*2,.11,'sine',.035,.04);
+ beat++;
+}
+function startMusic(){
+ audioSetup();audio.resume().then(()=>{
+  if(musicOn)return;
+  musicOn=true;$('music').textContent='♫ SOUND ON';$('music').classList.add('on');
+  casinoMusicTick();beatTimer=setInterval(casinoMusicTick,190);
+ });
+}
+function stopMusic(){
+ musicOn=false;if(beatTimer)clearInterval(beatTimer);beatTimer=null;
+ if(audio)audio.suspend();$('music').textContent='♫ SOUND OFF';$('music').classList.remove('on');
+}
+$('music').addEventListener('click',()=>musicOn?stopMusic():startMusic());
+const symbols=['7','♠','♦','♣','★','K','♛','♥'];
+function spinReel(id,final,delay){
+ const el=$(id),span=el.querySelector('span');el.classList.add('spinning');
+ let n=0;const timer=setInterval(()=>{span.textContent=symbols[Math.floor(Math.random()*symbols.length)];n++;},75);
+ setTimeout(()=>{clearInterval(timer);span.textContent=final;el.classList.remove('spinning');},delay);
+}
+function jackpotSound(){
+ [523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>tone(f,.7,'triangle',.15,i*.12));
+ noise(.5,.12,5000);
+}
+function fireworks(){
+ const colors=['#ffe08a','#fff','#d92d45','#f5bd52','#ff9c3d'];
+ for(let b=0;b<6;b++){
+  const cx=10+Math.random()*80,cy=12+Math.random()*62;
+  for(let i=0;i<18;i++){
+   const s=document.createElement('i');s.className='spark';s.style.left=cx+'%';s.style.top=cy+'%';s.style.setProperty('--c',colors[Math.floor(Math.random()*colors.length)]);
+   const a=2*Math.PI*i/18,d=45+Math.random()*95;s.style.setProperty('--x',Math.cos(a)*d+'px');s.style.setProperty('--y',Math.sin(a)*d+'px');s.style.animationDelay=(b*.13)+'s';$('fx').appendChild(s);
+  }
+ }
+ setTimeout(()=>$('fx').replaceChildren(),3000);
+}
+$('play').addEventListener('click',()=>{
+ if(played)return;played=true;startMusic();$('play').disabled=true;$('play').textContent='★ GOOD LUCK… ★';
+ tone(180,.7,'sawtooth',.12);noise(.45,.16,2400);
+ spinReel('r1','10',1450);spinReel('r2','JAN',2250);spinReel('r3','2027',3050);
+ setTimeout(()=>{
+  $('result').classList.add('show');$('countArea').classList.add('show');$('play').textContent='✦ JACKPOT UNLOCKED ✦';jackpotSound();fireworks();
+ },3150);
+});
+function updateCountdown(){
+ const target=Date.parse('2027-01-10T17:30:00+05:30');let diff=Math.max(0,target-Date.now());
+ const d=Math.floor(diff/86400000);diff%=86400000;const h=Math.floor(diff/3600000);diff%=3600000;const m=Math.floor(diff/60000);diff%=60000;const s=Math.floor(diff/1000);
+ $('days').textContent=String(d).padStart(2,'0');$('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');$('seconds').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
