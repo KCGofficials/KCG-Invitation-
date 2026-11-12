@@ -25,7 +25,7 @@ h1{font-size:clamp(34px,9vw,49px);line-height:1;margin:0;color:var(--gold2);text
 .reel span{display:block}
 .reel.spinning span{animation:reelBlur .11s linear infinite}
 @keyframes reelBlur{0%{transform:translateY(-12px);filter:blur(2px)}50%{transform:translateY(10px);filter:blur(1px)}100%{transform:translateY(-12px);filter:blur(2px)}}
-.lever{position:absolute;right:-16px;top:45px;width:13px;height:95px;border-radius:9px;background:linear-gradient(90deg,#8d6a37,#ffe6a0,#9d7137);box-shadow:2px 4px 7px #0009}
+.lever{position:absolute;right:-23px;top:45px;width:27px;height:95px;border:0;border-radius:14px;background:linear-gradient(90deg,#8d6a37,#ffe6a0,#9d7137);box-shadow:2px 4px 7px #0009;cursor:pointer;transform-origin:50% 12px;transition:transform .25s;z-index:3}.lever:active,.lever.pulled{transform:rotate(28deg)}.lever:focus-visible{outline:3px solid #fff0b4;outline-offset:4px}
 .lever:before{content:"";position:absolute;top:-10px;left:-8px;width:29px;height:29px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff1b9,#d5a344 55%,#7d1424 80%);border:2px solid #f8dda0}
 .machine-foot{font:9px Arial,sans-serif;letter-spacing:.2em;color:#f7d995;margin-top:13px}
 .play{margin-top:22px;padding:15px 34px;border:1px solid #fff0b4;border-radius:40px;background:linear-gradient(100deg,#f8d77e,#b98532 55%,#f8d77e);color:#3a1010;font:bold 13px Arial,sans-serif;letter-spacing:.2em;box-shadow:0 0 25px #e7b95177;cursor:pointer}
@@ -55,7 +55,7 @@ h1{font-size:clamp(34px,9vw,49px);line-height:1;margin:0;color:var(--gold2);text
 </style>
 </head>
 <body>
-<button class="music" id="music" type="button">♫ SOUND ON</button>
+<button class="music" id="music" type="button">♫ MUSIC OFF · TAP TO ON</button>
 <div id="fx"></div>
 <main class="page">
   <div class="brand">KCG PRESENTS</div>
@@ -69,7 +69,7 @@ h1{font-size:clamp(34px,9vw,49px);line-height:1;margin:0;color:var(--gold2);text
       <div class="reel" id="r2"><span>7</span></div>
       <div class="reel" id="r3"><span>♦</span></div>
     </div>
-    <div class="lever"></div>
+    <button class="lever" id="lever" type="button" aria-label="Pull the casino lever" title="PULL THE LEVER"></button>
     <div class="machine-foot">ROYAL KCG • LUCK IS IN YOUR HANDS</div>
   </section>
   <button class="play" id="play">▶ PLAY & REVEAL THE DATE</button>
@@ -127,13 +127,13 @@ function casinoMusicTick(){
 function startMusic(){
  audioSetup();audio.resume().then(()=>{
   if(musicOn)return;
-  musicOn=true;$('music').textContent='♫ SOUND ON';$('music').classList.add('on');
+  musicOn=true;$('music').textContent='♫ MUSIC ON';$('music').classList.add('on');
   casinoMusicTick();beatTimer=setInterval(casinoMusicTick,190);
  });
 }
 function stopMusic(){
  musicOn=false;if(beatTimer)clearInterval(beatTimer);beatTimer=null;
- if(audio)audio.suspend();$('music').textContent='♫ SOUND OFF';$('music').classList.remove('on');
+ if(audio)audio.suspend();$('music').textContent='♫ MUSIC OFF · TAP TO ON';$('music').classList.remove('on');
 }
 $('music').addEventListener('click',()=>musicOn?stopMusic():startMusic());
 const symbols=['7','♠','♦','♣','★','K','♛','♥'];
@@ -157,14 +157,20 @@ function fireworks(){
  }
  setTimeout(()=>$('fx').replaceChildren(),3000);
 }
-$('play').addEventListener('click',()=>{
- if(played)return;played=true;startMusic();$('play').disabled=true;$('play').textContent='★ GOOD LUCK… ★';
+function pullLever(){
+ if(played)return;
+ $('lever').classList.add('pulled');
+ setTimeout(()=>$('lever').classList.remove('pulled'),450);
+ played=true;startMusic();$('play').disabled=true;$('lever').disabled=true;
+ $('play').textContent='★ GOOD LUCK… ★';
  tone(180,.7,'sawtooth',.12);noise(.45,.16,2400);
  spinReel('r1','10',1450);spinReel('r2','JAN',2250);spinReel('r3','2027',3050);
  setTimeout(()=>{
   $('result').classList.add('show');$('countArea').classList.add('show');$('play').textContent='✦ JACKPOT UNLOCKED ✦';jackpotSound();fireworks();
  },3150);
-});
+}
+$('play').addEventListener('click',pullLever);
+$('lever').addEventListener('click',pullLever);
 function updateCountdown(){
  const target=Date.parse('2027-01-10T17:30:00+05:30');let diff=Math.max(0,target-Date.now());
  const d=Math.floor(diff/86400000);diff%=86400000;const h=Math.floor(diff/3600000);diff%=3600000;const m=Math.floor(diff/60000);diff%=60000;const s=Math.floor(diff/1000);
