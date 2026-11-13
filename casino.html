@@ -29,7 +29,14 @@ body:before{content:"";position:fixed;inset:-40%;pointer-events:none;background:
 .subtitle{position:relative;z-index:1;margin:0;color:#f6dfaa;font:700 clamp(10px,2.6vw,13px) Arial,sans-serif;letter-spacing:.36em;text-transform:uppercase;opacity:0;animation:up .8s 2s forwards}
 .frame{position:relative;z-index:1;margin:clamp(28px,6vh,52px) 0 22px;padding:15px 22px 14px;border-top:1px solid #e9c46d;border-bottom:1px solid #e9c46d;color:#fff1c9;letter-spacing:.24em;font-size:10px;font-weight:bold;text-transform:uppercase;opacity:0;animation:up .8s 2.25s forwards}
 .frame b{display:block;margin-top:7px;font:italic 19px Georgia,serif;letter-spacing:.08em;color:var(--gold)}
-.enter{position:relative;z-index:3;border:1px solid #fff0b2;border-radius:3px;padding:17px 28px;background:linear-gradient(110deg,#f7d77f,#b87928,#ffe8a0);background-size:200% 100%;color:#240912;font-weight:900;font-size:12px;letter-spacing:.22em;box-shadow:0 0 20px #f8cb64aa,0 0 50px #e21e4d66;cursor:pointer;animation:buttonGlow 1.8s ease-in-out infinite alternate,up .8s 2.5s both}
+.enter{position:relative;z-index:3;width:min(100%,390px);min-height:104px;padding:15px 22px 15px 90px;border:0;border-radius:8px 18px 18px 8px;color:#2a0b13;cursor:pointer;text-align:left;background:repeating-linear-gradient(90deg,#6c1022 0 8px,#8f1830 8px 16px);box-shadow:0 12px 24px #0009,0 0 24px #f8cb64aa,0 0 55px #e21e4d66;animation:buttonGlow 1.8s ease-in-out infinite alternate,up .8s 2.5s both;overflow:visible}
+.enter:before{content:"";position:absolute;left:0;top:0;bottom:0;width:72px;border-radius:8px 0 0 8px;background:linear-gradient(90deg,#b67a29,#ffe7a0 35%,#c28a35 70%,#ffe8a0);border-right:2px dashed #6c1022;box-shadow:inset -4px 0 8px #6b3a10}
+.enter:after{content:"KCG";position:absolute;left:9px;top:50%;transform:translateY(-50%) rotate(-90deg);font:900 17px Georgia,serif;letter-spacing:.15em;color:#5b1020;text-shadow:0 1px #fff2c1}
+.enter .band-copy{display:block;padding:9px 12px;border:1px solid #f4d27b;border-radius:5px;background:linear-gradient(110deg,#fff0b6,#d49a43 45%,#fff0b6);box-shadow:inset 0 0 10px #754315;color:#361019;text-align:center}
+.enter .band-small{display:block;font:900 8px Arial,sans-serif;letter-spacing:.3em}
+.enter .band-main{display:block;margin:5px 0 2px;font:900 14px Arial,sans-serif;letter-spacing:.13em}
+.enter .band-foot{display:block;font:700 8px Arial,sans-serif;letter-spacing:.18em}
+.enter:focus-visible{outline:3px solid #fff0b2;outline-offset:5px}
 @keyframes buttonGlow{to{box-shadow:0 0 34px #ffe38c,0 0 75px #ed1d4f99;transform:translateY(-2px)}}
 @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .hint{position:relative;z-index:1;margin:14px 0 0;color:#c9b99a;font-size:10px;letter-spacing:.13em;opacity:0;animation:up .7s 2.8s forwards}
@@ -53,7 +60,7 @@ body.entered .poster{animation:posterEnter .8s cubic-bezier(.2,.8,.2,1)}
  <div class="rule"></div>
  <p class="subtitle">An Extraordinary Celebration</p>
  <div class="frame">A night of glamour, excitement &amp; unforgettable moments<b>Something spectacular awaits…</b></div>
- <button class="enter" id="enter">▶ &nbsp; TAP TO ENTER THE SPECTACLE</button>
+ <button class="enter" id="enter" aria-label="KCG VIP wristband. Tap to enter the spectacle"><span class="band-copy"><span class="band-small">✦ KCG VIP ADMISSION ✦</span><span class="band-main">TAP TO ENTER</span><span class="band-foot">THE GRAND SPECTACLE • ADMIT ONE</span></span></button>
  <p class="hint" id="hint">SOUND ON • EXPERIENCE THE GRAND REVEAL</p>
  <section class="reveal" id="reveal"><div class="date">10 JANUARY 2027</div><div class="when">SUNDAY • 5:30 PM ONWARDS</div></section>
  <section class="count" id="count"><div class="countlabel">COUNTDOWN TO THE GRAND SPECTACLE</div><div class="timer"><div class="unit"><span class="num" id="d">00</span><small>DAYS</small></div><div class="unit"><span class="num" id="h">00</span><small>HOURS</small></div><div class="unit"><span class="num" id="m">00</span><small>MINUTES</small></div><div class="unit"><span class="num" id="s">00</span><small>SECONDS</small></div></div></section>
