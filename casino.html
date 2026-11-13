@@ -192,8 +192,8 @@ for(let i=0;i<34;i++){
 }
 
 
-// Original, beat-synchronised GRAND SPECTACLE soundtrack.
-// Starts after the visitor's first tap (browser audio policy).
+// The uploaded original KCG soundtrack is played as an MP3 from this repository.
+// It starts on the lever pull and is aligned with the 7.55-second date reveal.
 let nextBeat=0,step=0,songTimer=null,noiseBuffer=null;
 const BPM=128,BEAT=60/BPM,STEP=BEAT/2;
 function audioSetup(){
@@ -258,17 +258,30 @@ function musicScheduler(){
   scheduleStep(step,nextBeat);nextBeat+=STEP;step++;
  }
 }
-function startMusic(){
- audioSetup();audio.resume().then(()=>{
-  if(musicOn)return;
-  musicOn=true;nextBeat=audio.currentTime+.04;step=0;
-  $('music').textContent='♫ SOUND ON';$('music').classList.add('on');
-  musicScheduler();songTimer=setInterval(musicScheduler,25);beatTimer=songTimer;
+const musicTrack=new Audio('./imperial-velocity-kcg-40s.mp3');
+musicTrack.preload='auto';
+musicTrack.loop=false;
+musicTrack.addEventListener('ended',()=>{
+ musicOn=false;
+ $('music').textContent='♫ MUSIC FINISHED';
+ $('music').classList.remove('on');
+});
+function startMusic(restart=false){
+ if(musicOn&&!restart)return;
+ if(restart){musicTrack.pause();musicTrack.currentTime=0;}
+ musicTrack.play().then(()=>{
+  musicOn=true;
+  $('music').textContent='♫ SOUND ON';
+  $('music').classList.add('on');
+ }).catch(()=>{
+  $('music').textContent='♫ TAP TO PLAY MUSIC';
  });
 }
 function stopMusic(){
- musicOn=false;if(songTimer)clearInterval(songTimer);songTimer=null;beatTimer=null;
- if(audio)audio.suspend();$('music').textContent='♫ SOUND OFF · TAP FOR MUSIC';$('music').classList.remove('on');
+ musicOn=false;
+ musicTrack.pause();
+ $('music').textContent='♫ SOUND OFF · TAP FOR MUSIC';
+ $('music').classList.remove('on');
 }
 $('music').addEventListener('click',()=>musicOn?stopMusic():startMusic());
 function impact(t=0){
@@ -316,7 +329,7 @@ function pullLever(){
  if(played)return;
  $('lever').classList.add('pulled');
  setTimeout(()=>$('lever').classList.remove('pulled'),450);
- played=true;startMusic();$('play').disabled=true;$('lever').disabled=true;
+ played=true;startMusic(true);$('play').disabled=true;$('lever').disabled=true;
  $('play').textContent='★ GET READY… ★';
  if(audio){voice(90,.8,'sawtooth',.16,audio.currentTime,'lowpass');hitNoise(audio.currentTime,.55,.22,2400,'lowpass')}
  spinReel('r1','10',4600);spinReel('r2','JAN',5600);spinReel('r3','2027',6600);
