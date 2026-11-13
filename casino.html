@@ -78,7 +78,7 @@ body:before{content:"";position:fixed;inset:-60%;pointer-events:none;background:
 .seal{transform:translateY(-75vh) rotate(-28deg) scale(1.35);opacity:0;filter:blur(5px)}.seal.land{animation:stampLand .9s cubic-bezier(.16,.82,.22,1) forwards}
 @keyframes stampLand{0%{transform:translateY(-75vh) rotate(-28deg) scale(1.35);opacity:0;filter:blur(5px)}55%{transform:translateY(12px) rotate(-9deg) scale(.92);opacity:1;filter:blur(0)}72%{transform:translateY(-7px) rotate(-14deg) scale(1.04)}86%{transform:translateY(3px) rotate(-11deg) scale(.98)}100%{transform:translateY(0) rotate(-12deg) scale(1);opacity:1;filter:blur(0)}}
 @keyframes handStamp{0%{transform:translate(-50%,-75vh) rotate(-5deg);opacity:0}58%{transform:translate(-50%,0) rotate(2deg);opacity:1}72%{transform:translate(-50%,-9px) rotate(-2deg)}86%{transform:translate(-50%,3px) rotate(1deg)}100%{transform:translate(-50%,0) rotate(0);opacity:1}}
-.stamper.press{animation:handPress .36s ease-in forwards}
+.stamper .seal{position:absolute;top:153px;left:13px;transform:rotate(-12deg) scale(1);opacity:1;filter:none}.stamper.press{animation:handPress .36s ease-in forwards}
 @keyframes handPress{0%{transform:translate(-50%,0) rotate(0)}55%{transform:translate(-50%,17px) rotate(-2deg)}100%{transform:translate(-50%,0) rotate(0)}}
 .stamp-action{margin-top:8px;padding:16px 25px;border:2px solid #fff0b5;border-radius:7px;background:linear-gradient(110deg,#ffedaa,#d58e2e 48%,#ffe9a4);color:#350916;font-size:12px;font-weight:1000;letter-spacing:.17em;box-shadow:0 0 22px #ffd15caa,0 0 50px #e51d4b66;cursor:pointer;animation:throb 1s ease-in-out infinite alternate}
 .stamp-note{margin-top:16px;color:#c9a968;font-size:8px;letter-spacing:.28em}
