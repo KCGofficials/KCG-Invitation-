@@ -51,8 +51,46 @@ body:before{content:"";position:fixed;inset:-40%;pointer-events:none;background:
 body.entered .poster{animation:posterEnter .8s cubic-bezier(.2,.8,.2,1)}
 @keyframes posterEnter{from{transform:scale(.94);filter:brightness(2)}to{transform:scale(1);filter:brightness(1)}}
 @media(max-height:700px){.poster{min-height:calc(100svh - 20px);padding-top:20px;padding-bottom:18px}.crown{margin:12px 0 6px}.frame{margin:20px 0 14px}.foot{padding-top:15px}}
+
+.entry-gate{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 18px;background:radial-gradient(ellipse at 50% 45%,#571021 0,#1c0713 48%,#05040a 85%);transition:opacity .85s ease,visibility .85s ease}
+.entry-gate:before,.entry-gate:after{content:"";position:absolute;inset:14px;border:1px solid #e9c56b66;pointer-events:none}
+.entry-gate:after{inset:22px;border-color:#e9c56b22}
+.entry-gate.dismiss{opacity:0;visibility:hidden;pointer-events:none}
+.gate-kicker{position:relative;color:#f8d77d;font-size:10px;font-weight:800;letter-spacing:.48em}
+.gate-title{position:relative;margin-top:16px;font:900 clamp(32px,8vw,54px)/.96 Georgia,serif;letter-spacing:.12em;color:#fff0bd;text-shadow:0 0 25px #ffbd58aa,0 5px 20px #000}
+.gate-title em{font-style:normal;color:#f3c66b;letter-spacing:.2em}
+.gate-rule{width:130px;height:1px;margin:19px auto;background:linear-gradient(90deg,transparent,#f9d77b,transparent);box-shadow:0 0 12px #f9d77b}
+.hand-stage{position:relative;width:min(76vw,290px);height:205px;margin:6px auto 4px;display:grid;place-items:center;filter:drop-shadow(0 14px 20px #0009)}
+.hand-art{width:100%;height:100%;overflow:visible}
+.hand-stamp{position:absolute;left:50%;top:68%;transform:translate(-50%,-50%) rotate(-13deg) scale(1.7);width:104px;height:104px;border:4px double #f9d77b;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffe7a0;background:#9e0c2b;box-shadow:0 0 0 5px #9e0c2b66,0 0 25px #ff244c88,inset 0 0 12px #31000c;opacity:0;transition:transform .28s cubic-bezier(.2,1.8,.4,1),opacity .2s}
+.hand-stamp span{font:900 22px Georgia,serif;letter-spacing:.08em}.hand-stamp small{font-size:8px;letter-spacing:.12em;font-weight:900}.hand-stamp b{font-size:12px;margin-top:2px}
+.hand-stamp.stamped{opacity:1;transform:translate(-50%,-50%) rotate(-13deg) scale(1)}
+.gate-copy{position:relative;color:#f3dfb3;font-size:10px;line-height:1.9;letter-spacing:.22em}
+.stamp-button{position:relative;margin-top:22px;padding:17px 25px;border:1px solid #fff0b2;border-radius:3px;background:linear-gradient(110deg,#f8d77f,#b87928,#ffe8a0);color:#240912;font-size:11px;font-weight:900;letter-spacing:.17em;box-shadow:0 0 22px #f8cb64aa,0 0 48px #e21e4d55;animation:stampPulse 1.6s ease-in-out infinite alternate;cursor:pointer}
+@keyframes stampPulse{to{transform:translateY(-3px);box-shadow:0 0 35px #ffe38c,0 0 65px #ed1d4f99}}
+.gate-foot{position:relative;margin-top:26px;color:#b99a5b;font-size:8px;letter-spacing:.3em}
+@media(max-height:650px){.hand-stage{height:160px}.gate-title{font-size:32px}.gate-foot{margin-top:14px}}
+
 </style></head>
 <body>
+
+<div class="entry-gate" id="entryGate">
+ <div class="gate-kicker">KCG • EXCLUSIVE ACCESS</div>
+ <div class="gate-title">THE GRAND<br><em>ENTRANCE</em></div>
+ <div class="gate-rule"></div>
+ <div class="hand-stage">
+  <svg class="hand-art" viewBox="0 0 260 190" aria-hidden="true">
+   <defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7d7a0"/><stop offset=".55" stop-color="#c88d5d"/><stop offset="1" stop-color="#8e4c3d"/></linearGradient></defs>
+   <path d="M74 166 C65 157 59 143 54 128 L31 82 C27 73 31 65 39 63 C47 61 52 68 57 77 L76 107 L68 37 C67 26 74 19 83 20 C92 21 95 28 96 39 L101 91 L104 22 C105 11 112 6 121 8 C130 10 133 17 132 28 L131 91 L141 32 C143 21 151 17 159 20 C168 23 170 31 167 42 L156 103 L174 64 C179 54 188 52 195 57 C203 62 202 71 197 81 L174 132 C168 149 155 164 137 171 L126 178 L88 177 Z" fill="url(#skin)" stroke="#ffe4b2" stroke-width="2"/>
+   <path d="M68 117 C93 126 144 127 166 114 L157 145 C134 157 97 156 80 145Z" fill="#8b122b" stroke="#f8d77b" stroke-width="2"/>
+  </svg>
+  <div class="hand-stamp" id="handStamp"><span>KCG</span><small>VIP ACCESS</small><b>✦</b></div>
+ </div>
+ <div class="gate-copy" id="gateCopy">YOUR NIGHT. YOUR ENTRY.<br>GET YOUR EXCLUSIVE HAND STAMP.</div>
+ <button class="stamp-button" id="stampButton">✦ &nbsp; TAP TO GET STAMPED</button>
+ <div class="gate-foot">ONE NIGHT • ONE GRAND EXPERIENCE</div>
+</div>
+
 <main class="poster">
  <div class="topline">KCG PRESENTS</div>
  <div class="crown">✦</div>
@@ -72,7 +110,8 @@ body.entered .poster{animation:posterEnter .8s cubic-bezier(.2,.8,.2,1)}
 const $=id=>document.getElementById(id);let started=false;
 function burst(){const colors=['#ffe08a','#fff','#e62a50','#f5bd52'];for(let b=0;b<7;b++){let x=15+Math.random()*70,y=18+Math.random()*60;for(let i=0;i<20;i++){let p=document.createElement('i');p.className='burst';p.style.left=x+'%';p.style.top=y+'%';p.style.setProperty('--c',colors[i%4]);let a=i*Math.PI/10,dist=45+Math.random()*90;p.style.setProperty('--x',Math.cos(a)*dist+'px');p.style.setProperty('--y',Math.sin(a)*dist+'px');$('burst').appendChild(p)}}setTimeout(()=>$('burst').replaceChildren(),2100)}
 async function enter(){if(started)return;started=true;document.body.classList.add('entered');$('enter').textContent='✦ WELCOME TO THE SPECTACLE ✦';$('hint').textContent='LET THE CELEBRATION BEGIN';const a=$('track');a.volume=1;try{await a.play();$('audioState').textContent='♫ SOUND ON'}catch(e){$('audioState').textContent='♫ TAP SOUND'}burst();setTimeout(()=>{$('reveal').classList.add('show');$('count').classList.add('show');burst()},4200)}
-$('enter').addEventListener('click',enter);
+async function stampedEntry(){if(started)return;started=true;$('handStamp').classList.add('stamped');$('stampButton').textContent='✦ ACCESS GRANTED ✦';$('gateCopy').innerHTML='YOUR ENTRY IS CONFIRMED.<br>WELCOME TO THE GRAND SPECTACLE.';const a=$('track');a.volume=1;try{await a.play();$('audioState').textContent='♫ SOUND ON'}catch(e){$('audioState').textContent='♫ TAP SOUND'}burst();setTimeout(()=>{$('entryGate').classList.add('dismiss');document.body.classList.add('entered');$('reveal').classList.add('show');$('count').classList.add('show');burst()},1450)}
+$('stampButton').addEventListener('click',stampedEntry);
 $('audioState').addEventListener('click',async()=>{const a=$('track');if(a.paused){a.volume=1;try{await a.play();$('audioState').textContent='♫ SOUND ON'}catch(e){}}else{a.pause();$('audioState').textContent='♫ SOUND OFF'}});
 function tick(){let diff=Math.max(0,Date.parse('2027-01-10T17:30:00+05:30')-Date.now());let days=Math.floor(diff/86400000);diff%=86400000;let hours=Math.floor(diff/3600000);diff%=3600000;let mins=Math.floor(diff/60000);diff%=60000;let secs=Math.floor(diff/1000);$('d').textContent=String(days).padStart(2,'0');$('h').textContent=String(hours).padStart(2,'0');$('m').textContent=String(mins).padStart(2,'0');$('s').textContent=String(secs).padStart(2,'0')}tick();setInterval(tick,1000);
 </script></body></html>
