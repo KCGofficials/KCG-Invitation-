@@ -66,8 +66,8 @@ body:before{content:"";position:fixed;inset:-60%;pointer-events:none;background:
 .seal strong{font:900 34px Georgia,serif;letter-spacing:.12em;text-shadow:0 2px 5px #30000d}
 .seal span{font-size:10px;font-weight:900;letter-spacing:.22em;margin-top:3px}
 .seal small{font-size:8px;letter-spacing:.18em;margin-top:5px}
-.seal.land{animation:stampLand .48s cubic-bezier(.15,.8,.25,1) forwards}
-@keyframes stampLand{0%{transform:translateY(-110px) rotate(-28deg) scale(1.45);opacity:.1;filter:blur(5px)}58%{transform:translateY(8px) rotate(-10deg) scale(.92);opacity:1}78%{transform:translateY(-4px) rotate(-13deg) scale(1.04)}100%{transform:translateY(0) rotate(-12deg) scale(1);opacity:1;filter:blur(0)}}
+.seal{transform:translateY(-75vh) rotate(-28deg) scale(1.35);opacity:0;filter:blur(5px)}.seal.land{animation:stampLand .9s cubic-bezier(.16,.82,.22,1) forwards}
+@keyframes stampLand{0%{transform:translateY(-75vh) rotate(-28deg) scale(1.35);opacity:0;filter:blur(5px)}55%{transform:translateY(12px) rotate(-9deg) scale(.92);opacity:1;filter:blur(0)}72%{transform:translateY(-7px) rotate(-14deg) scale(1.04)}86%{transform:translateY(3px) rotate(-11deg) scale(.98)}100%{transform:translateY(0) rotate(-12deg) scale(1);opacity:1;filter:blur(0)}}
 .stamp-action{margin-top:8px;padding:16px 25px;border:2px solid #fff0b5;border-radius:7px;background:linear-gradient(110deg,#ffedaa,#d58e2e 48%,#ffe9a4);color:#350916;font-size:12px;font-weight:1000;letter-spacing:.17em;box-shadow:0 0 22px #ffd15caa,0 0 50px #e51d4b66;cursor:pointer;animation:throb 1s ease-in-out infinite alternate}
 .stamp-note{margin-top:16px;color:#c9a968;font-size:8px;letter-spacing:.28em}
 .stamp-gate.done .stamp-action{opacity:.65;animation:none}
@@ -116,6 +116,7 @@ $('spin').addEventListener('click',spin);$('sound').addEventListener('click',()=
 function tick(){let diff=Math.max(0,Date.parse('2027-01-10T17:30:00+05:30')-Date.now());let days=Math.floor(diff/86400000);diff%=86400000;let hours=Math.floor(diff/3600000);diff%=3600000;let mins=Math.floor(diff/60000);diff%=60000;let secs=Math.floor(diff/1000);$('d').textContent=String(days).padStart(2,'0');$('h').textContent=String(hours).padStart(2,'0');$('m').textContent=String(mins).padStart(2,'0');$('s').textContent=String(secs).padStart(2,'0')}tick();setInterval(tick,1000);
 
 const stampGate=$('stampGate'),stampAction=$('stampAction'),vipSeal=$('vipSeal');
-stampAction.addEventListener('click',()=>{stampAction.disabled=true;stampGate.classList.add('done');vipSeal.classList.add('land');startAudio();tone(72,.38,'sine',.4);noise(.22,.2,.02);setTimeout(()=>{stampGate.classList.add('hide')},1150)});
+requestAnimationFrame(()=>requestAnimationFrame(()=>vipSeal.classList.add('land')));
+stampAction.addEventListener('click',()=>{stampAction.disabled=true;stampGate.classList.add('done');vipSeal.classList.remove('land');void vipSeal.offsetWidth;vipSeal.classList.add('land');startAudio();tone(72,.38,'sine',.4);noise(.22,.2,.02);setTimeout(()=>{stampGate.classList.add('hide')},1150)});
 
 </script></body></html>
