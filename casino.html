@@ -51,7 +51,37 @@ body:before{content:"";position:fixed;inset:-60%;pointer-events:none;background:
 @keyframes flash{0%{opacity:.9}100%{opacity:0}}
 .sound{position:fixed;top:10px;right:10px;z-index:12;border:1px solid #f8d77b88;background:#180711;color:#ffdf91;padding:8px 10px;font-size:9px;letter-spacing:.1em}
 @media(max-height:720px){.stage{min-height:calc(100svh - 20px);padding-top:16px;padding-bottom:16px}.brand{margin-top:7px}.tag{margin:8px 0 12px}.reel{height:90px}.spinbtn{margin-top:14px;padding:13px}.foot{padding-top:12px}}
+
+/* Stamp-only VIP entry: no hand illustration */
+.stamp-gate{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(ellipse at 50% 48%,#5b0a20 0,#200714 48%,#07040a 88%);transition:opacity .75s ease,visibility .75s ease}
+.stamp-gate:before{content:"";position:absolute;inset:14px;border:1px solid #e9c56b66;pointer-events:none}
+.stamp-gate.hide{opacity:0;visibility:hidden;pointer-events:none}
+.stamp-kicker{color:#ffd978;font-size:10px;font-weight:900;letter-spacing:.42em}
+.stamp-head{margin:16px 0 5px;font:900 clamp(29px,7vw,46px) Georgia,serif;letter-spacing:.12em;color:#fff0bd;text-shadow:0 0 25px #ffbd55}
+.stamp-sub{color:#e9cc9a;font-size:10px;letter-spacing:.2em}
+.seal-wrap{height:205px;width:230px;display:grid;place-items:center;margin:10px auto 4px;position:relative}
+.seal{width:164px;height:164px;border:5px double #ffdf8a;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;color:#ffe9a9;background:radial-gradient(circle,#a80e31 0,#7b0924 72%,#510617 100%);box-shadow:0 0 0 7px #a80e3155,0 0 35px #e91d4f88,inset 0 0 18px #30000d;transform:rotate(-12deg) scale(1.25);opacity:.88}
+.seal:before{content:"";position:absolute;inset:8px;border:1px dashed #ffe7a0;border-radius:50%}
+.seal:after{content:"✦  •  ✦";position:absolute;bottom:22px;font-size:12px;letter-spacing:.2em}
+.seal strong{font:900 34px Georgia,serif;letter-spacing:.12em;text-shadow:0 2px 5px #30000d}
+.seal span{font-size:10px;font-weight:900;letter-spacing:.22em;margin-top:3px}
+.seal small{font-size:8px;letter-spacing:.18em;margin-top:5px}
+.seal.land{animation:stampLand .48s cubic-bezier(.15,.8,.25,1) forwards}
+@keyframes stampLand{0%{transform:translateY(-110px) rotate(-28deg) scale(1.45);opacity:.1;filter:blur(5px)}58%{transform:translateY(8px) rotate(-10deg) scale(.92);opacity:1}78%{transform:translateY(-4px) rotate(-13deg) scale(1.04)}100%{transform:translateY(0) rotate(-12deg) scale(1);opacity:1;filter:blur(0)}}
+.stamp-action{margin-top:8px;padding:16px 25px;border:2px solid #fff0b5;border-radius:7px;background:linear-gradient(110deg,#ffedaa,#d58e2e 48%,#ffe9a4);color:#350916;font-size:12px;font-weight:1000;letter-spacing:.17em;box-shadow:0 0 22px #ffd15caa,0 0 50px #e51d4b66;cursor:pointer;animation:throb 1s ease-in-out infinite alternate}
+.stamp-note{margin-top:16px;color:#c9a968;font-size:8px;letter-spacing:.28em}
+.stamp-gate.done .stamp-action{opacity:.65;animation:none}
+
 </style></head><body>
+<section class="stamp-gate" id="stampGate">
+ <div class="stamp-kicker">KCG • EXCLUSIVE ACCESS</div>
+ <div class="stamp-head">YOUR VIP ENTRY</div>
+ <div class="stamp-sub">ONE NIGHT • ONE GRAND EXPERIENCE</div>
+ <div class="seal-wrap"><div class="seal" id="vipSeal"><strong>KCG</strong><span>VIP ACCESS</span><small>OFFICIAL ENTRY SEAL</small></div></div>
+ <button class="stamp-action" id="stampAction">✦ &nbsp; STAMP TO ENTER &nbsp; ✦</button>
+ <div class="stamp-note">TAP TO RECEIVE YOUR OFFICIAL KCG ENTRY STAMP</div>
+</section>
+
 <main class="stage">
  <div class="kicker">KCG PRESENTS • EXCLUSIVE EVENT</div>
  <h1 class="brand">THE GRAND <span>SPECTACLE</span></h1>
@@ -84,4 +114,8 @@ function flash(){ $('flash').classList.remove('hit');void $('flash').offsetWidth
 async function spin(){if(started)return;started=true;startAudio();$('spin').disabled=true;$('spin').textContent='⚡ THE REELS ARE SPINNING…';$('instruction').textContent='FEEL THE ENERGY • WAIT FOR THE JACKPOT';$('machine').classList.add('spinning');sfxSpin();const symbols=['7','★','♠','♦','♣','✦','K','♛'];const reels=[$('r1'),$('r2'),$('r3')];let timers=reels.map((el,i)=>setInterval(()=>{el.textContent=symbols[Math.floor(Math.random()*symbols.length)]},65+i*9));[1250,2050,2900].forEach((delay,i)=>setTimeout(()=>{clearInterval(timers[i]);reels[i].textContent=['10','JAN','27'][i];tone(170+i*65,.3,'sine',.18);flash()},delay));setTimeout(()=>{$('machine').classList.remove('spinning');$('result').classList.add('show');$('count').classList.add('show');$('spin').textContent='✦ JACKPOT • DATE UNLOCKED ✦';$('instruction').textContent='THE COUNTDOWN TO THE GRAND SPECTACLE BEGINS NOW';sfxWin();coins();flash()},3500)}
 $('spin').addEventListener('click',spin);$('sound').addEventListener('click',()=>{if(loopTimer)stopAudio();else startAudio()});
 function tick(){let diff=Math.max(0,Date.parse('2027-01-10T17:30:00+05:30')-Date.now());let days=Math.floor(diff/86400000);diff%=86400000;let hours=Math.floor(diff/3600000);diff%=3600000;let mins=Math.floor(diff/60000);diff%=60000;let secs=Math.floor(diff/1000);$('d').textContent=String(days).padStart(2,'0');$('h').textContent=String(hours).padStart(2,'0');$('m').textContent=String(mins).padStart(2,'0');$('s').textContent=String(secs).padStart(2,'0')}tick();setInterval(tick,1000);
+
+const stampGate=$('stampGate'),stampAction=$('stampAction'),vipSeal=$('vipSeal');
+stampAction.addEventListener('click',()=>{stampAction.disabled=true;stampGate.classList.add('done');vipSeal.classList.add('land');startAudio();tone(72,.38,'sine',.4);noise(.22,.2,.02);setTimeout(()=>{stampGate.classList.add('hide')},1150)});
+
 </script></body></html>
