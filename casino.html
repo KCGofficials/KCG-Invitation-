@@ -59,9 +59,13 @@ body:before{content:"";position:fixed;inset:-60%;pointer-events:none;background:
 .stamp-kicker{color:#ffd978;font-size:10px;font-weight:900;letter-spacing:.42em}
 .stamp-head{margin:16px 0 5px;font:900 clamp(29px,7vw,46px) Georgia,serif;letter-spacing:.12em;color:#fff0bd;text-shadow:0 0 25px #ffbd55}
 .stamp-sub{color:#e9cc9a;font-size:10px;letter-spacing:.2em}
-.seal-wrap{height:245px;width:250px;display:grid;place-items:center;margin:0 auto 0;position:relative;overflow:visible}
+.seal-wrap{height:270px;width:270px;display:grid;place-items:center;margin:0 auto 0;position:relative;overflow:visible}
+.stamp-imprint{position:absolute;left:50%;bottom:2px;width:132px;height:132px;transform:translateX(-50%) scale(1.55) rotate(-9deg);opacity:0;border:5px double #f13a55;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ff5369;text-shadow:0 0 2px #ff5266;font-weight:1000;box-shadow:inset 0 0 0 3px #e82b4a55,0 0 12px #e82b4a33;filter:blur(2px)}
+.stamp-imprint:before{content:"";position:absolute;inset:8px;border:1.5px dashed #f13a55;border-radius:50%}.stamp-imprint b{font:900 27px Georgia,serif;letter-spacing:.1em}.stamp-imprint span{font-size:9px;letter-spacing:.15em;margin-top:4px}.stamp-imprint small{font-size:7px;letter-spacing:.12em;margin-top:5px}
+.stamp-imprint.printed{animation:inkPrint .38s cubic-bezier(.2,.9,.2,1) forwards}
+@keyframes inkPrint{0%{opacity:0;transform:translateX(-50%) scale(1.55) rotate(-9deg);filter:blur(3px)}65%{opacity:.95;transform:translateX(-50%) scale(.94) rotate(-9deg);filter:blur(.4px)}100%{opacity:.82;transform:translateX(-50%) scale(1) rotate(-9deg);filter:blur(0)}}
 .stamper{position:absolute;top:0;left:50%;width:190px;height:230px;transform:translate(-50%,-75vh) rotate(-5deg);opacity:0;filter:drop-shadow(0 12px 10px #0009)}
-.stamper.land{animation:handStamp .95s cubic-bezier(.16,.82,.22,1) forwards}
+.stamper.land{animation:handStamp 1.08s cubic-bezier(.16,.82,.22,1) forwards}
 .arm{position:absolute;top:0;left:70px;width:62px;height:104px;border-radius:25px 25px 12px 12px;background:linear-gradient(90deg,#8e4b2c,#d99a6b 45%,#a95f3d);border:2px solid #f1c29a}
 .cuff{position:absolute;top:82px;left:62px;width:78px;height:28px;border-radius:8px;background:linear-gradient(90deg,#15151d,#42404b,#111018);border:2px solid #d7b66d}
 .palm{position:absolute;top:91px;left:61px;width:82px;height:68px;border-radius:35px 32px 24px 24px;background:linear-gradient(110deg,#f0bd91,#c77e54 65%,#9c5739);border:2px solid #f4c6a1;z-index:3}
@@ -77,9 +81,9 @@ body:before{content:"";position:fixed;inset:-60%;pointer-events:none;background:
 .seal small{font-size:8px;letter-spacing:.18em;margin-top:5px}
 .seal{transform:translateY(-75vh) rotate(-28deg) scale(1.35);opacity:0;filter:blur(5px)}.seal.land{animation:stampLand .9s cubic-bezier(.16,.82,.22,1) forwards}
 @keyframes stampLand{0%{transform:translateY(-75vh) rotate(-28deg) scale(1.35);opacity:0;filter:blur(5px)}55%{transform:translateY(12px) rotate(-9deg) scale(.92);opacity:1;filter:blur(0)}72%{transform:translateY(-7px) rotate(-14deg) scale(1.04)}86%{transform:translateY(3px) rotate(-11deg) scale(.98)}100%{transform:translateY(0) rotate(-12deg) scale(1);opacity:1;filter:blur(0)}}
-@keyframes handStamp{0%{transform:translate(-50%,-75vh) rotate(-5deg);opacity:0}58%{transform:translate(-50%,0) rotate(2deg);opacity:1}72%{transform:translate(-50%,-9px) rotate(-2deg)}86%{transform:translate(-50%,3px) rotate(1deg)}100%{transform:translate(-50%,0) rotate(0);opacity:1}}
-.stamper .seal{position:absolute;top:153px;left:13px;transform:rotate(-12deg) scale(1);opacity:1;filter:none}.stamper.press{animation:handPress .36s ease-in forwards}
-@keyframes handPress{0%{transform:translate(-50%,0) rotate(0)}55%{transform:translate(-50%,17px) rotate(-2deg)}100%{transform:translate(-50%,0) rotate(0)}}
+@keyframes handStamp{0%{transform:translate(-50%,-75vh) rotate(-5deg);opacity:0}62%{transform:translate(-50%,0) rotate(1deg);opacity:1}78%{transform:translate(-50%,-5px) rotate(-1deg)}100%{transform:translate(-50%,0) rotate(0);opacity:1}}
+.stamper .seal{position:absolute;top:153px;left:13px;transform:rotate(-12deg) scale(1);opacity:1;filter:none}.stamper.press{animation:handPress .48s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes handPress{0%{transform:translate(-50%,0) rotate(0)}32%{transform:translate(-50%,22px) rotate(-2deg)}62%{transform:translate(-50%,22px) rotate(-2deg)}100%{transform:translate(-50%,0) rotate(0)}}
 .stamp-action{margin-top:8px;padding:16px 25px;border:2px solid #fff0b5;border-radius:7px;background:linear-gradient(110deg,#ffedaa,#d58e2e 48%,#ffe9a4);color:#350916;font-size:12px;font-weight:1000;letter-spacing:.17em;box-shadow:0 0 22px #ffd15caa,0 0 50px #e51d4b66;cursor:pointer;animation:throb 1s ease-in-out infinite alternate}
 .stamp-note{margin-top:16px;color:#c9a968;font-size:8px;letter-spacing:.28em}
 .stamp-gate.done .stamp-action{opacity:.65;animation:none}
@@ -89,7 +93,7 @@ body:before{content:"";position:fixed;inset:-60%;pointer-events:none;background:
  <div class="stamp-kicker">KCG • EXCLUSIVE ACCESS</div>
  <div class="stamp-head">YOUR VIP ENTRY</div>
  <div class="stamp-sub">ONE NIGHT • ONE GRAND EXPERIENCE</div>
- <div class="seal-wrap"><div class="stamper" id="vipStamper"><div class="arm"></div><div class="cuff"></div><div class="palm"></div><div class="finger f1"></div><div class="finger f2"></div><div class="finger f3"></div><div class="finger f4"></div><div class="thumb"></div><div class="stamp-grip"></div><div class="seal" id="vipSeal"><strong>KCG</strong><span>VIP ACCESS</span><small>OFFICIAL ENTRY SEAL</small></div></div></div>
+ <div class="seal-wrap"><div class="stamp-imprint" id="stampImprint"><b>KCG</b><span>VIP ACCESS</span><small>OFFICIAL ENTRY</small></div><div class="stamper" id="vipStamper"><div class="arm"></div><div class="cuff"></div><div class="palm"></div><div class="finger f1"></div><div class="finger f2"></div><div class="finger f3"></div><div class="finger f4"></div><div class="thumb"></div><div class="stamp-grip"></div><div class="seal" id="vipSeal"><strong>KCG</strong><span>VIP ACCESS</span><small>OFFICIAL ENTRY SEAL</small></div></div></div>
  <button class="stamp-action" id="stampAction">✦ &nbsp; STAMP TO ENTER &nbsp; ✦</button>
  <div class="stamp-note">TAP TO RECEIVE YOUR OFFICIAL KCG ENTRY STAMP</div>
 </section>
@@ -127,7 +131,7 @@ async function spin(){if(started)return;started=true;startAudio();$('spin').disa
 $('spin').addEventListener('click',spin);$('sound').addEventListener('click',()=>{if(!bgMusic.paused)stopAudio();else startAudio()});
 function tick(){let diff=Math.max(0,Date.parse('2027-01-10T17:30:00+05:30')-Date.now());let days=Math.floor(diff/86400000);diff%=86400000;let hours=Math.floor(diff/3600000);diff%=3600000;let mins=Math.floor(diff/60000);diff%=60000;let secs=Math.floor(diff/1000);$('d').textContent=String(days).padStart(2,'0');$('h').textContent=String(hours).padStart(2,'0');$('m').textContent=String(mins).padStart(2,'0');$('s').textContent=String(secs).padStart(2,'0')}tick();setInterval(tick,1000);
 
-const stampGate=$('stampGate'),stampAction=$('stampAction'),vipStamper=$('vipStamper');
-stampAction.addEventListener('click',()=>{stampAction.disabled=true;stampGate.classList.add('done');startAudio();vipStamper.classList.add('land');setTimeout(()=>vipStamper.classList.add('press'),720);setTimeout(()=>{stampGate.classList.add('hide')},1550)});
+const stampGate=$('stampGate'),stampAction=$('stampAction'),vipStamper=$('vipStamper'),stampImprint=$('stampImprint');
+stampAction.addEventListener('click',()=>{stampAction.disabled=true;stampGate.classList.add('done');startAudio();vipStamper.classList.add('land');setTimeout(()=>{vipStamper.classList.add('press')},1080);setTimeout(()=>{stampImprint.classList.add('printed');flash()},1390);setTimeout(()=>{stampGate.classList.add('hide')},3450)});
 
 </script></body></html>
