@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100609">
+<title>KCG Casino Arena</title>
+<style>
+:root{--bg:#10080c;--panel:#1d1017;--panel2:#28141c;--gold:#f4cf78;--gold2:#ffe9aa;--red:#a8172c;--green:#1f9d65;--muted:#bba9a2;--line:#68434a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#42121d 0,#16090f 48%,#090609 100%);color:#fff4dc;font:15px Arial,sans-serif;min-height:100vh}
+header{padding:22px 16px 12px;text-align:center}.brand{color:var(--gold);font-size:11px;letter-spacing:.35em;font-weight:800}.brandtitle{font:700 clamp(27px,6vw,42px) Georgia,serif;color:var(--gold2);margin:9px 0 5px}.sub{color:var(--muted);font-size:12px}
+.wrap{max-width:1050px;margin:auto;padding:10px 14px 40px}.topline{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:8px 0 14px}.pill{border:1px solid var(--line);border-radius:30px;padding:8px 12px;color:var(--gold2);font-size:11px;letter-spacing:.06em}.warning{background:#5a3514;border-color:#a97832;color:#ffe6a5}
+.tabs,.actions{display:flex;gap:8px;flex-wrap:wrap}.tab,button,select{border:1px solid var(--line);border-radius:12px;background:#24131b;color:#f9e9d0;padding:11px 14px;font-weight:700;cursor:pointer}.tab.active,button.primary{background:linear-gradient(110deg,#f5d47d,#b17b2e);color:#351016;border-color:#f9dc92}.tab:disabled,button:disabled{opacity:.45;cursor:not-allowed}
+.card{background:linear-gradient(145deg,#25141c,#160d12);border:1px solid #70444d;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 12px 30px #0005}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.stat{background:#10090e;border:1px solid #55333b;border-radius:14px;padding:13px}.stat strong{display:block;font-size:clamp(22px,4vw,30px);color:var(--gold);margin:5px 0}.muted{color:var(--muted);font-size:12px}.sectiontitle{font:700 21px Georgia,serif;color:var(--gold2);margin:4px 0 12px}.teamrow{display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #51323a}.teamrow:last-child{border:0}.choice{display:flex;gap:6px}.choice button{flex:1;padding:10px 4px}.choice .back.sel{background:#14583b;border-color:#36b982;color:#fff}.choice .challenge.sel{background:#791e30;border-color:#e65b71;color:#fff}.teamlabel{font-weight:800;color:var(--gold2)}.notice{border-left:3px solid var(--gold);background:#2a1b1a;padding:12px;border-radius:8px;color:#f4dfb9;font-size:13px;line-height:1.5}.result{padding:15px;border-radius:14px;background:#102a20;border:1px solid #2d956a}.result.lose{background:#34141d;border-color:#a84255}.big{font-size:29px;font-weight:900;color:var(--gold2)}.hidden{display:none!important}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:9px 7px;border-bottom:1px solid #4a3038}th{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.right{text-align:right}.vault{border:1px solid var(--gold);background:radial-gradient(ellipse at top,#58202a,#170a10 75%);padding:22px;border-radius:18px;text-align:center}.vault .seal{font:800 12px Arial;letter-spacing:.3em;color:var(--gold)}.vault .reveal{font:700 30px Georgia;color:var(--gold2);margin:12px 0}.smallbtn{padding:8px 10px;font-size:12px}.footer{text-align:center;color:#8e7778;font-size:11px;padding:18px}
+@media(max-width:620px){.grid3{grid-template-columns:1fr}.teamrow{grid-template-columns:52px 1fr 1fr}.teamrow button{font-size:11px;padding:9px 3px}.wrap{padding-left:10px;padding-right:10px}}
+</style>
+</head>
+<body>
+<header><div class="brand">KHANDELWAL CREATIVE GROUP</div><div class="brandtitle">KCG CASINO ARENA</div><div class="sub">THE TEAM BETTING EXPERIENCE</div></header>
+<div class="wrap">
+<div class="topline"><span class="pill warning" id="modePill">LOCAL PREVIEW · NOT YET SYNCED ACROSS DEVICES</span><span class="pill" id="statusPill">READY TO START</span></div>
+<div class="tabs" id="roleTabs">
+<button class="tab active" data-role="admin">ADMIN</button><button class="tab" data-role="team">TEAM MOBILE</button><button class="tab" data-role="led">LED DISPLAY</button>
+</div>
+<section id="adminView">
+<div class="card">
+<div class="sectiontitle">Admin Control Room</div>
+<div class="grid">
+<div class="stat"><span class="muted">CURRENT PERFORMING TEAM</span><strong id="currentTeamLabel">TEAM A</strong><select id="currentTeam"></select></div>
+<div class="stat"><span class="muted">CURRENT CATEGORY</span><strong id="currentCategoryLabel">RAMP WALK</strong><select id="categorySelect"><option>Ramp Walk</option><option>Tagline</option><option>Act</option></select></div>
+</div>
+<div class="actions" style="margin-top:12px"><button class="primary" id="openBetting">OPEN BETTING</button><button id="lockBetting">LOCK BETTING</button><button id="declareResult">DECLARE RESULT</button><button id="resetCategory">RESET CATEGORY</button></div>
+<p class="muted" id="adminHint">Select the performing team and category. After the performance, open betting for the other five teams.</p>
+</div>
+<div class="card">
+<div class="sectiontitle">Team Decisions · 1,000 Coins Fixed</div>
+<div id="adminBets"></div>
+<div class="notice" style="margin-top:12px">Each of the five non-performing teams makes exactly one choice: BACK or CHALLENGE. The selected side and 1,000 Coins are locked together. No second voting round.</div>
+</div>
+<div class="card">
+<div class="sectiontitle">Live Jackpot</div>
+<div class="grid3">
+<div class="stat"><span class="muted">TOTAL POOL</span><strong id="totalPool">0</strong></div>
+<div class="stat"><span class="muted">BACK POOL</span><strong id="backPool" style="color:#52d49b">0</strong><span class="muted" id="backCount">0 teams</span></div>
+<div class="stat"><span class="muted">CHALLENGE POOL</span><strong id="challengePool" style="color:#ff8294">0</strong><span class="muted" id="challengeCount">0 teams</span></div>
+</div>
+<div id="resultPanel" class="hidden" style="margin-top:12px"></div>
+</div>
+<div class="card">
+<div class="sectiontitle">Team Wallets</div><div id="walletTable"></div>
+</div>
+<div class="card">
+<div class="sectiontitle">Golden Vault · After each team's three categories</div>
+<div class="notice">At the start of a team's three-category round, the system secretly selects one category. After Ramp Walk, Tagline and Act are complete, the Vault reveals that category. Winning bettors in that category receive a 500-Coin bonus each. A separate 2,500-Coin Vault reserve covers up to five winners.</div>
+<div class="actions" style="margin-top:12px"><button class="primary" id="startTeamRound">START TEAM ROUND & LOCK SECRET</button><button id="revealVault">REVEAL GOLDEN VAULT</button></div>
+<div id="vaultPanel" class="hidden" style="margin-top:12px"></div>
+</div>
+</section>
+<section id="teamView" class="hidden">
+<div class="card"><div class="sectiontitle">Team Mobile Betting</div><label class="muted">Select your team</label><select id="mobileTeam" style="width:100%;margin:8px 0 12px"></select><div class="grid"><div class="stat"><span class="muted">YOUR WALLET</span><strong id="mobileWallet">15,000</strong></div><div class="stat"><span class="muted">FIXED BET</span><strong>1,000</strong></div></div><div class="sectiontitle" style="margin-top:18px" id="mobileMatch">TEAM A · RAMP WALK</div><p class="muted">Performance complete? Choose one side. Submit locks your choice and the fixed bet.</p><div class="grid"><button class="primary" id="mobileBack">BACK · 1,000</button><button id="mobileChallenge">CHALLENGE · 1,000</button></div><div id="mobileFeedback" class="notice" style="margin-top:12px">Waiting for Admin to open betting.</div></div>
+</section>
+<section id="ledView" class="hidden">
+<div class="card" style="text-align:center"><div class="brand">KCG CASINO ARENA · LIVE LED</div><div class="sectiontitle" id="ledMatch">TEAM A · RAMP WALK</div><div class="big" id="ledJackpot">0 COINS</div><div class="grid" style="margin-top:14px"><div class="stat"><span class="muted">BACK</span><strong id="ledBack">0</strong><span id="ledBackCount" class="muted">0 teams</span></div><div class="stat"><span class="muted">CHALLENGE</span><strong id="ledChallenge">0</strong><span id="ledChallengeCount" class="muted">0 teams</span></div></div><div id="ledResult" style="margin-top:14px"></div></div>
+<div class="card"><div class="sectiontitle">TEAM WALLETS</div><div id="ledWallets"></div></div><div class="vault"><div class="seal">THE GOLDEN VAULT</div><div class="reveal" id="ledVault">SEALED</div><div class="muted">The secret category is revealed after all three categories.</div></div>
+</section>
+<div class="footer">KCG CASINO · DEMO BUILD · Fake event coins only</div>
+</div>
+<script>
+const TEAM_NAMES=['Team A','Team B','Team C','Team D','Team E','Team F'];
+const CATS=['Ramp Walk','Tagline','Act'];
+const KEY='kcgCasinoPrototypeV1';
+const fresh=()=>({wallets:Object.fromEntries(TEAM_NAMES.map(t=>[t,15000])),roundTeam:'Team A',category:'Ramp Walk',phase:'ready',bets:{},results:{},secret:null,vaultRevealed:false,vaultBonusPaid:false,history:[]});
+let state=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||fresh()}catch{return fresh()}}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function key(){return state.roundTeam+'|'+state.category}
+function voters(){return TEAM_NAMES.filter(t=>t!==state.roundTeam)}
+function currentBets(){return state.bets[key()]||{}}
+function pools(){const b=currentBets();const backs=Object.values(b).filter(x=>x==='BACK').length;const challenges=Object.values(b).filter(x=>x==='CHALLENGE').length;return{backs,challenges,back:backs*1000,challenge:challenges*1000,total:(backs+challenges)*1000}}
+function winner(){const p=pools();return p.backs>=3?'BACK':'CHALLENGE'}
+function payout(){const p=pools(),w=winner(),wCount=w==='BACK'?p.backs:p.challenges,lPool=w==='BACK'?p.challenge:p.back;return wCount?1000+lPool/wCount:0}
+function money(n){return Math.round(n).toLocaleString('en-IN')}
+function setRole(role){document.querySelectorAll('#roleTabs .tab').forEach(x=>x.classList.toggle('active',x.dataset.role===role));['admin','team','led'].forEach(r=>document.getElementById(r+'View').classList.toggle('hidden',r!==role));render()}
+function init(){const ct=document.getElementById('currentTeam'),mt=document.getElementById('mobileTeam');TEAM_NAMES.forEach(t=>{ct.add(new Option(t,t));mt.add(new Option(t,t))});ct.value=state.roundTeam;document.getElementById('categorySelect').value=state.category;document.getElementById('currentTeam').onchange=e=>{state.roundTeam=e.target.value;save()};document.getElementById('categorySelect').onchange=e=>{state.category=e.target.value;state.phase='ready';save()};document.getElementById('mobileTeam').onchange=render;document.querySelectorAll('#roleTabs .tab').forEach(b=>b.onclick=()=>setRole(b.dataset.role));document.getElementById('openBetting').onclick=()=>{state.phase='open';save()};document.getElementById('lockBetting').onclick=()=>{if(Object.keys(currentBets()).length!==5){alert('All five teams must submit before locking.');return}state.phase='locked';save()};document.getElementById('declareResult').onclick=declare;document.getElementById('resetCategory').onclick=()=>{if(confirm('Reset this category bets?')){delete state.bets[key()];delete state.results[key()];state.phase='ready';save()}};document.getElementById('mobileBack').onclick=()=>mobileBet('BACK');document.getElementById('mobileChallenge').onclick=()=>mobileBet('CHALLENGE');document.getElementById('startTeamRound').onclick=startTeamRound;document.getElementById('revealVault').onclick=revealVault;render()}
+function mobileBet(side){const t=document.getElementById('mobileTeam').value;if(t===state.roundTeam){alert('Performing team cannot bet on its own performance.');return}if(state.phase!=='open'){alert('Betting is not open yet.');return}if(currentBets()[t]){alert('This team has already submitted one bet.');return}if(state.wallets[t]<1000){alert('Insufficient wallet balance.');return}state.wallets[t]-=1000;state.bets[key()]={...currentBets(),[t]:side};save()}
+function declare(){if(state.phase!=='locked'){alert('Lock betting after all five teams submit.');return}const p=pools();if(p.backs+p.challenges!==5){alert('Five team decisions are required.');return}const w=winner(),pay=payout();const b=currentBets();TEAM_NAMES.filter(t=>t!==state.roundTeam&&b[t]===w).forEach(t=>state.wallets[t]+=pay);state.results[key()]={winner:w,backs:p.backs,challenges:p.challenges,payout:pay};state.phase='result';state.history.push({team:state.roundTeam,category:state.category,winner:w,back:p.backs,challenge:p.challenges});save()}
+function startTeamRound(){state.secret=CATS[Math.floor(Math.random()*3)];state.vaultRevealed=false;state.vaultBonusPaid=false;state.roundTeam=document.getElementById('currentTeam').value;state.category='Ramp Walk';document.getElementById('categorySelect').value='Ramp Walk';state.phase='ready';save();alert('Team round started. Golden Vault secret locked.')}
+function revealVault(){if(!state.secret){alert('Start this team round first.');return}const done=CATS.every(c=>state.results[state.roundTeam+'|'+c]);if(!done){alert('Complete all three categories before revealing the Vault.');return}if(state.vaultRevealed){alert('Vault already revealed.');return}state.vaultRevealed=true;const k=state.roundTeam+'|'+state.secret;const r=state.results[k];if(r){const b=state.bets[k]||{};TEAM_NAMES.filter(t=>t!==state.roundTeam&&b[t]===r.winner).forEach(t=>state.wallets[t]+=500);state.vaultBonusPaid=true}save()}
+function render(){const p=pools(),b=currentBets(),w=winner();document.getElementById('currentTeam').value=state.roundTeam;document.getElementById('categorySelect').value=state.category;document.getElementById('currentTeamLabel').textContent=state.roundTeam.toUpperCase();document.getElementById('currentCategoryLabel').textContent=state.category.toUpperCase();document.getElementById('statusPill').textContent=state.phase.toUpperCase();document.getElementById('openBetting').disabled=state.phase==='open'||state.phase==='locked'||state.phase==='result';document.getElementById('lockBetting').disabled=state.phase!=='open';document.getElementById('declareResult').disabled=state.phase!=='locked';document.getElementById('adminHint').textContent=state.phase==='ready'?'Performance complete? Open betting for the other five teams.':state.phase==='open'?'Betting is open. Each other team submits once.':'Current category status: '+state.phase+'.';
+document.getElementById('adminBets').innerHTML=voters().map(t=>'<div class="teamrow"><span class="teamlabel">'+t.replace('Team ','TEAM ')+'</span><div class="choice"><button class="back '+(b[t]==='BACK'?'sel':'')+'" disabled>'+ (b[t]==='BACK'?'✓ ':'')+'BACK</button></div><div class="choice"><button class="challenge '+(b[t]==='CHALLENGE'?'sel':'')+'" disabled>'+(b[t]==='CHALLENGE'?'✓ ':'')+'CHALLENGE</button></div></div>').join('');document.getElementById('totalPool').textContent=money(p.total);document.getElementById('backPool').textContent=money(p.back);document.getElementById('challengePool').textContent=money(p.challenge);document.getElementById('backCount').textContent=p.backs+' teams';document.getElementById('challengeCount').textContent=p.challenges+' teams';
+const result=state.results[key()];document.getElementById('resultPanel').classList.toggle('hidden',!result);if(result)document.getElementById('resultPanel').innerHTML='<div class="result"><div class="big">'+result.winner+' WINS</div><p>Majority: '+(result.winner==='BACK'?result.backs:result.challenges)+' of 5 teams</p><b>Each winning team receives '+money(result.payout)+' Coins</b></div>';
+document.getElementById('walletTable').innerHTML=walletHTML();document.getElementById('ledWallets').innerHTML=walletHTML();document.getElementById('mobileWallet').textContent=money(state.wallets[document.getElementById('mobileTeam').value]);document.getElementById('mobileMatch').textContent=state.roundTeam.toUpperCase()+' · '+state.category.toUpperCase();const mt=document.getElementById('mobileTeam').value;const mb=currentBets()[mt];document.getElementById('mobileBack').disabled=state.phase!=='open'||!!mb||mt===state.roundTeam;document.getElementById('mobileChallenge').disabled=state.phase!=='open'||!!mb||mt===state.roundTeam;document.getElementById('mobileFeedback').textContent=mb?'Your '+mb+' bet is locked for 1,000 Coins.':state.phase==='open'?'Choose one side. Your bet locks immediately.':'Waiting for Admin to open betting.';
+document.getElementById('ledMatch').textContent=state.roundTeam.toUpperCase()+' · '+state.category.toUpperCase();document.getElementById('ledJackpot').textContent=money(p.total)+' COINS';document.getElementById('ledBack').textContent=money(p.back);document.getElementById('ledChallenge').textContent=money(p.challenge);document.getElementById('ledBackCount').textContent=p.backs+' teams';document.getElementById('ledChallengeCount').textContent=p.challenges+' teams';document.getElementById('ledResult').textContent=result?result.winner+' WINS · '+money(result.payout)+' COINS TO EACH WINNER':'';document.getElementById('vaultPanel').classList.toggle('hidden',!state.vaultRevealed);document.getElementById('vaultPanel').innerHTML=state.vaultRevealed?'<div class="vault"><div class="seal">GOLDEN VAULT REVEALED</div><div class="reveal">'+state.secret.toUpperCase()+'</div><div>Winning teams in this category received 500 bonus Coins each.</div></div>':'';document.getElementById('ledVault').textContent=state.vaultRevealed?state.secret.toUpperCase():'SEALED'}
+function walletHTML(){return '<table><thead><tr><th>Team</th><th class="right">Wallet</th></tr></thead><tbody>'+TEAM_NAMES.map(t=>'<tr><td>'+t+'</td><td class="right">'+money(state.wallets[t])+'</td></tr>').join('')+'</tbody></table>'}
+init();
+window.addEventListener('storage',e=>{if(e.key===KEY){state=load();render()}});
+</script>
+</body></html>
